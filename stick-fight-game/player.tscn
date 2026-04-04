@@ -2,18 +2,38 @@
 
 [ext_resource type="Script" uid="uid://cghp85bpios5t" path="res://player.gd" id="1_4flbx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
-radius = 25.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
+size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4flbx")
+move_speed = 250.0
+jump_force = -450.0
+gravity = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_onrkg")
+shape = SubResource("RectangleShape2D_4flbx")
 
-[node name="Body" type="ColorRect" parent="."]
-offset_left = -18.0
-offset_top = -18.0
-offset_right = 22.0
-offset_bottom = 22.0
-scale = Vector2(0.9, 0.9)
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Body" type="ColorRect" parent="Visuals"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="LeftArmPivot" type="Node2D" parent="Visuals"]
+position = Vector2(-30, -9)
+
+[node name="LeftArm" type="ColorRect" parent="Visuals/LeftArmPivot"]
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 20.0
+
+[node name="RightArmPivot" type="Node2D" parent="Visuals"]
+position = Vector2(29, -9)
+
+[node name="RightArm" type="ColorRect" parent="Visuals/RightArmPivot"]
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 20.0

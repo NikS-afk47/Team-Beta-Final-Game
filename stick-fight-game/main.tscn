@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://game_manager.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://LeftElevator.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bco25mnfxhls1" path="res://room_template.tscn" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://c4uytotyq6nrn" path="res://RightElevator.tscn" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://i7sjlldxcxl5" path="res://player.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://void_zone.gd" id="5_lquwl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(2301, 77)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 10.780548)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(40.731216, 34.4)
 
 [node name="Main" type="Node2D"]
 
@@ -30,6 +30,7 @@ color = Color(0.07429191, 0.0854407, 0.08569164, 1)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_0xm2m")
+room_scenes = Array[PackedScene]([ExtResource("2_7mycd")])
 wins_needed = 7
 
 [node name="LeftElevator" parent="." instance=ExtResource("1_1bvp3")]
@@ -38,12 +39,15 @@ position = Vector2(-495, 500)
 [node name="RightElevator" parent="." instance=ExtResource("2_lquwl")]
 position = Vector2(1644, 500)
 
+[node name="RoomHolder" type="Node2D" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(573, 497)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Player1" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(91, 503)
+player_id = 1
 move_speed = 300.0
 jump_force = -400.0
 gravity = 800.0
@@ -57,23 +61,21 @@ jump_force = -400.0
 gravity = 800.0
 max_fall_speed = 1200.0
 
-[node name="Floor" type="StaticBody2D" parent="."]
-modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
-top_level = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(571.5, 621.5)
-shape = SubResource("RectangleShape2D_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="Floor"]
-position = Vector2(573.0699, 645)
-scale = Vector2(2294.14, 122.74178)
-texture = SubResource("CanvasTexture_1bvp3")
-
 [node name="VoidZone" type="Area2D" parent="."]
 position = Vector2(592, 1073)
 scale = Vector2(121.70353, 19.217232)
 script = ExtResource("5_lquwl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone"]
+position = Vector2(0, 4.52719)
 shape = SubResource("RectangleShape2D_lquwl")
+debug_color = Color(0.60702735, 0, 0.13382712, 0.41960785)
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.5000816, 0.42878503, 1, 0.41960785)

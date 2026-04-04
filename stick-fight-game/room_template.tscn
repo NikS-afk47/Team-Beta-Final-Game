@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bco25mnfxhls1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
+size = Vector2(40.731216, 34.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smsha"]
+size = Vector2(2301, 77)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_457cn"]
+
+[node name="RoomTemplate" type="Node2D"]
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_724v5")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Platforms"]
+modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
+top_level = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Floor"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_smsha")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Floor"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_457cn")
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="ItemSpawns" type="Node2D" parent="."]

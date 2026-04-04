@@ -4,6 +4,11 @@ extends Node
 @onready var right_elevator = $"../RightElevator"
 @onready var player1 = $"../Player1"
 @onready var player2 = $"../Player2"
+@onready var room_holder = $"../RoomHolder"
+
+@export var room_scenes: Array[PackedScene]
+
+var current_room: Node = null
 
 var round_over: bool = false
 var match_over: bool = false
@@ -16,6 +21,7 @@ var p2_score: int = 0
 @export var round_end_delay: float = 1.0
 
 func _ready() -> void:
+	randomize()
 	start_round()
 
 func start_round() -> void:
@@ -23,6 +29,8 @@ func start_round() -> void:
 		return
 
 	round_over = false
+
+	load_random_room()
 
 	player1.global_position = left_elevator.get_spawn_position()
 	player2.global_position = right_elevator.get_spawn_position()
@@ -43,6 +51,19 @@ func start_round() -> void:
 
 	print("Round start")
 	print("Score: P1 ", p1_score, " - P2 ", p2_score)
+
+func load_random_room() -> void:
+	if current_room != null:
+		current_room.queue_free()
+		current_room = null
+
+	if room_scenes.is_empty():
+		push_error("No room scenes assigned in GameManager")
+		return
+
+	var room_index = randi() % room_scenes.size()
+	current_room = room_scenes[room_index].instantiate()
+	room_holder.add_child(current_room)
 
 func on_player_died(dead_player: Node) -> void:
 	if round_over or match_over:
