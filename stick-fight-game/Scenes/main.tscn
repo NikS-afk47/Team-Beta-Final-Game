@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://cflb77ltr0el5"]
+
+[ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bco25mnfxhls1" path="res://Scenes/room_template.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c4uytotyq6nrn" path="res://Scenes/RightElevator.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cl4re2f6s1686" path="res://Scenes/player.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 10.780548)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(40.731216, 34.4)
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -604.0
+offset_top = -169.0
+offset_right = 548.32996
+offset_bottom = 1001.505
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.0800014, 1.16)
+color = Color(0.07429191, 0.0854407, 0.08569164, 1)
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_0xm2m")
+room_scenes = Array[PackedScene]([ExtResource("2_7mycd")])
+wins_needed = 7
+
+[node name="LeftElevator" parent="." instance=ExtResource("1_1bvp3")]
+position = Vector2(-495, 500)
+
+[node name="RightElevator" parent="." instance=ExtResource("2_lquwl")]
+position = Vector2(1644, 500)
+
+[node name="RoomHolder" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(573, 497)
+zoom = Vector2(0.5, 0.5)
+
+[node name="VoidZone" type="Area2D" parent="."]
+position = Vector2(592, 1073)
+scale = Vector2(121.70353, 19.217232)
+script = ExtResource("5_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone"]
+position = Vector2(0, 4.52719)
+shape = SubResource("RectangleShape2D_lquwl")
+debug_color = Color(0.60702735, 0, 0.13382712, 0.41960785)
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.5000816, 0.42878503, 1, 0.41960785)
+
+[node name="Player1" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-357, 396)
+device_id = 0
+
+[node name="Player2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(1457, 376)
+player_id = 2
+device_id = 1

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl4re2f6s1686"]
+
+[ext_resource type="Script" uid="uid://cghp85bpios5t" path="res://Scripts/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://d0trhbx2fdxco" path="res://Scenes/bullet.tscn" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://dt3k5avtnfi61" path="res://Scenes/thrown_weapon.tscn" id="3_6t5aa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0iea"]
+size = Vector2(24, 24)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4flbx")
+bullet_scene = ExtResource("2_cvnsp")
+thrown_weapon_scene = ExtResource("3_6t5aa")
+move_speed = 380.0
+acceleration = 1950.0
+friction = 2250.0
+jump_force = -450.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v0iea")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Body" type="ColorRect" parent="Visuals"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftArm" type="ColorRect" parent="Visuals"]
+offset_left = -18.0
+offset_top = -6.0
+offset_right = -12.0
+offset_bottom = 6.0
+
+[node name="RightArm" type="ColorRect" parent="Visuals"]
+offset_left = 12.0
+offset_top = -6.0
+offset_right = 18.0
+offset_bottom = 6.0
+
+[node name="AimLine" type="Line2D" parent="."]
+position = Vector2(14, 0)
+points = PackedVector2Array(0, 0, 30, 0)
+width = 2.0
+
+[node name="WeaponHold" type="Marker2D" parent="."]
