@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy3jso3twdel4"
-path="res://.godot/imported/Picture1.png-5a8b817a7d32a97af75600c82c0fcb28.ctex"
+uid="uid://cy5hq637xr6y2"
+path="res://.godot/imported/FiveSeven.png-5572348d3ab7e2a5528923f8e3f77fef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Picture1.png"
-dest_files=["res://.godot/imported/Picture1.png-5a8b817a7d32a97af75600c82c0fcb28.ctex"]
+source_file="res://Assets/WeaponSprites/gun/pistols/fiveSeven/FiveSeven.png"
+dest_files=["res://.godot/imported/FiveSeven.png-5572348d3ab7e2a5528923f8e3f77fef.ctex"]
 
 [params]
 

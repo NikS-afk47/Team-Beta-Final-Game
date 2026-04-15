@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cflb77ltr0el5"]
 
-[ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://game_manager.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://LeftElevator.tscn" id="1_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://bco25mnfxhls1" path="res://room_template.tscn" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://c4uytotyq6nrn" path="res://RightElevator.tscn" id="2_lquwl"]
-[ext_resource type="PackedScene" uid="uid://i7sjlldxcxl5" path="res://player.tscn" id="3_h2yge"]
-[ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://void_zone.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bco25mnfxhls1" path="res://Scenes/room_template.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c4uytotyq6nrn" path="res://Scenes/RightElevator.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cl4re2f6s1686" path="res://Scenes/player.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(20, 10.780548)
@@ -45,22 +45,6 @@ position = Vector2(1644, 500)
 position = Vector2(573, 497)
 zoom = Vector2(0.5, 0.5)
 
-[node name="Player1" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(91, 503)
-player_id = 1
-move_speed = 300.0
-jump_force = -400.0
-gravity = 800.0
-max_fall_speed = 1200.0
-
-[node name="Player2" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(1060, 505)
-player_id = 2
-move_speed = 300.0
-jump_force = -400.0
-gravity = 800.0
-max_fall_speed = 1200.0
-
 [node name="VoidZone" type="Area2D" parent="."]
 position = Vector2(592, 1073)
 scale = Vector2(121.70353, 19.217232)
@@ -79,3 +63,12 @@ position = Vector2(575.7031, 434.5)
 scale = Vector2(49.018764, 33.866276)
 shape = SubResource("RectangleShape2D_7mycd")
 debug_color = Color(0.5000816, 0.42878503, 1, 0.41960785)
+
+[node name="Player1" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-357, 396)
+device_id = 0
+
+[node name="Player2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(1457, 376)
+player_id = 2
+device_id = 1
