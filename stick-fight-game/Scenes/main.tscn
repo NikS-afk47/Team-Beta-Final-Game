@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cl4re2f6s1686" path="res://Scenes/player.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="3_hptm8"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="4_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://cl4re2f6s1686" path="res://stickmanplayer.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
