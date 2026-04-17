@@ -40,8 +40,20 @@ texture = SubResource("CanvasTexture_457cn")
 
 [node name="Hazards" type="Node2D" parent="."]
 
-[node name="ItemSpawns" type="Node2D" parent="."]
-
 [node name="WeaponPickup" parent="." instance=ExtResource("1_lt6kj")]
 position = Vector2(575, 506)
 weapon_data = ExtResource("2_d2rwr")
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(193, 478)
+
+[node name="Spawn2" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(393, 478)
+
+[node name="Spawn3" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(593, 478)
+
+[node name="Spawn4" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(793, 478)
