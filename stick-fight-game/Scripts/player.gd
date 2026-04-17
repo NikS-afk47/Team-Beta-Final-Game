@@ -209,7 +209,13 @@ func shoot_weapon() -> void:
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
+func can_pickup_weapon() -> bool:
+	return current_weapon == null
+
 func pickup_weapon(weapon_data: WeaponData) -> void:
+	if current_weapon != null:
+		return
+
 	current_weapon = weapon_data.duplicate()
 	update_held_weapon_visual()
 	print(name, " picked up ", current_weapon.weapon_name)
