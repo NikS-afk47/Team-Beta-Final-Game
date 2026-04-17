@@ -20,12 +20,14 @@ var current_room: Node = null
 
 var round_over: bool = false
 var match_over: bool = false
+var game_over := false
 
 var p1_score: int = 0
 var p2_score: int = 0
 
 func _ready() -> void:
 	randomize()
+	game_over = false
 	start_round()
 
 func start_round() -> void:
@@ -98,9 +100,13 @@ func check_match_win() -> void:
 	if p1_score >= wins_needed:
 		match_over = true
 		print("PLAYER 1 WINS THE MATCH")
+		end_game(1)
+
 	elif p2_score >= wins_needed:
 		match_over = true
 		print("PLAYER 2 WINS THE MATCH")
+		end_game(2)
+
 
 func spawn_random_weapons() -> void:
 	if current_room == null:
@@ -152,3 +158,20 @@ func clear_old_weapon_pickups() -> void:
 	for child in get_parent().get_children():
 		if child.name == "WeaponPickup":
 			child.queue_free()
+
+func end_game(winner: int) -> void:
+	if game_over:
+		return  # prevents multiple triggers
+
+	game_over = true
+
+	if winner == 1:
+		SaveData.add_player1_win()
+	elif winner == 2:
+		SaveData.add_player2_win()
+
+	print("Player ", winner, " wins!")
+
+	await get_tree().create_timer(1.5).timeout
+
+	get_tree().change_scene_to_file("res://Scenes/start_menu.tscn")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhhql6appy7u7"]
 
 [ext_resource type="Script" uid="uid://cghp85bpios5t" path="res://Scripts/player.gd" id="1_4flbx"]
-[ext_resource type="Script" path="res://Scenes/visuals.gd" id="4_fkybt"]
+[ext_resource type="Script" uid="uid://85pyaiobyffu" path="res://visuals.gd" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://du3jevmn16glc" path="res://Assets/StickmanHead.png" id="4_vgqql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]

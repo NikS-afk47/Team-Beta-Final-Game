@@ -40,7 +40,7 @@ var current_weapon: WeaponData = null
 var held_weapon_sprite: Sprite2D = null
 
 var can_shoot: bool = true
-
+var is_dead: bool = false
 
 var jump_was_down: bool = false
 var attack_was_down: bool = false
@@ -48,6 +48,7 @@ var throw_was_down: bool = false
 
 func _ready() -> void:
 	health = max_health
+	is_dead = false
 	setup_colors()
 	update_aim_line()
 
@@ -260,6 +261,9 @@ func clear_held_weapon_visual() -> void:
 		held_weapon_sprite = null
 
 func take_hit(hit_dir: Vector2, damage: int, force: float) -> void:
+	if is_dead:
+		return
+
 	if is_blocking:
 		force *= 0.15
 		damage = 0
@@ -271,6 +275,7 @@ func take_hit(hit_dir: Vector2, damage: int, force: float) -> void:
 	print(name, " health: ", health)
 
 	if health <= 0:
+		is_dead = true
 		die()
 
 	velocity += hit_dir * force
@@ -278,6 +283,7 @@ func take_hit(hit_dir: Vector2, damage: int, force: float) -> void:
 func reset_for_round() -> void:
 	velocity = Vector2.ZERO
 	health = max_health
+	is_dead = false
 	current_weapon = null
 	can_shoot = true
 	is_blocking = false
