@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0s10sd8c4upp"]
+[gd_scene load_steps=3 format=3 uid="uid://d0s10sd8c4upp"]
 
-[ext_resource type="Texture2D" uid="uid://dy3jso3twdel4" path="res://Picture1.png" id="1_jwbto"]
+[ext_resource type="Script" uid="uid://chrwt3cc6rxa2" path="res://Scripts/start_menu.gd" id="1_jgtwh"]
+[ext_resource type="Texture2D" uid="uid://bl3rkhdrx571i" path="res://Assets/TitleScreen.png" id="2_m6uer"]
 
 [node name="Start menu" type="Control"]
 layout_mode = 3
@@ -13,51 +14,65 @@ offset_right = 1.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jgtwh")
 
 [node name="Picture1" type="Sprite2D" parent="."]
-position = Vector2(577, 323.1875)
-scale = Vector2(2.7322273, 2.7020042)
-texture = ExtResource("1_jwbto")
+position = Vector2(576.5, 387)
+scale = Vector2(0.750651, 0.6331409)
+texture = ExtResource("2_m6uer")
 
-[node name="Stick game" type="Button" parent="."]
+[node name="Player1Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.49500003
-anchor_top = 0.407
-anchor_right = 0.49500003
-anchor_bottom = 0.407
-offset_left = -139.24005
-offset_top = -129.736
-offset_right = 128.75995
-offset_bottom = 129.264
-theme_override_font_sizes/font_size = 50
-text = "Stick Battle 
-game "
-
-[node name="Player 1" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.047000002
-anchor_right = 0.076000005
-anchor_bottom = 0.037
-offset_left = -19.144001
-offset_top = 28.0
-offset_right = 27.447998
-offset_bottom = 46.024002
-theme_override_colors/font_color = Color(0.99258786, 0.9951685, 0.990508, 1)
-text = "PLayer 1
+anchor_left = 0.065000005
+anchor_top = 0.081
+anchor_right = 0.065000005
+anchor_bottom = 0.081
+offset_left = -39.88001
+offset_top = -24.487999
+offset_right = 40.119995
+offset_bottom = 24.512001
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Player 1
 Wins: "
 
-[node name="Player 2" type="Label" parent="."]
+[node name="Player2Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.91800004
-anchor_top = 0.104
-anchor_right = 0.91800004
-anchor_bottom = 0.104
-offset_left = -19.53601
-offset_top = -39.392
-offset_right = 46.46399
-offset_bottom = -16.391998
+anchor_left = 0.88100004
+anchor_top = 0.066
+anchor_right = 0.88100004
+anchor_bottom = 0.066
+offset_left = -32.91205
+offset_top = -24.768002
+offset_right = 33.08795
+offset_bottom = 24.231998
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Player 2 
 Wins:"
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.771
+anchor_top = 0.814
+anchor_right = 0.771
+anchor_bottom = 0.814
+offset_left = -108.19202
+offset_top = -44.471985
+offset_right = 107.80798
+offset_bottom = 44.528015
+text = "Play"
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.208
+anchor_top = 0.814
+anchor_right = 0.208
+anchor_bottom = 0.814
+offset_left = -107.616
+offset_top = -44.471985
+offset_right = 108.384
+offset_bottom = 44.528015
+text = "Exit"

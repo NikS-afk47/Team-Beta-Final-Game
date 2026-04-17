@@ -11,4 +11,4 @@ class_name WeaponData
 @export var explodes: bool = false
 @export var explosion_radius: float = 0.0
 @export var weapon_texture: Texture2D
-@export var weapon_scale: Vector2 = Vector2(0.7, 0.7)
+@export var weapon_scale: Vector2 = Vector2(0.5, 0.5)

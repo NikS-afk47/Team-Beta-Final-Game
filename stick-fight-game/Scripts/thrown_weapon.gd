@@ -13,6 +13,7 @@ var velocity: Vector2 = Vector2.ZERO
 @onready var sprite = $Sprite2D
 
 func _ready() -> void:
+	add_to_group("thrown_weapons")
 	if weapon_texture != null:
 		sprite.texture = weapon_texture
 		sprite.scale = weapon_scale

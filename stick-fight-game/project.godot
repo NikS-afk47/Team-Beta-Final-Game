@@ -15,12 +15,21 @@ run/main_scene="uid://cflb77ltr0el5"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SaveData="*res://Scripts/save_data.gd"
+
+[editor]
+
+version_control/autoload_on_startup=true
+
 [file_customization]
 
 folder_colors={
 "res://Assets/": "blue",
 "res://Assets/WeaponSprites/": "purple",
 "res://Scenes/": "blue",
+"res://Scenes/Rooms/": "teal",
 "res://Scripts/": "green",
 "res://Weapon Data/": "purple"
 }

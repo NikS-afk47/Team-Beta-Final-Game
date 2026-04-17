@@ -7,7 +7,6 @@
 
 [node name="ThrownWeapon" type="Area2D"]
 script = ExtResource("1_ydjee")
-speed = 700.0
 fall_gravity = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
