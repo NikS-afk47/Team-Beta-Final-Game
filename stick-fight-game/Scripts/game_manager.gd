@@ -1,10 +1,16 @@
 extends Node
 
-@onready var left_elevator = $"../LeftElevator"
-@onready var right_elevator = $"../RightElevator"
-@onready var player1 = $"../Player1"
-@onready var player2 = $"../Player2"
-@onready var room_holder = $"../RoomHolder"
+@export var left_elevator_path: NodePath
+@export var right_elevator_path: NodePath
+@export var player1_path: NodePath
+@export var player2_path: NodePath
+@export var room_holder_path: NodePath
+
+@onready var left_elevator = get_node(left_elevator_path)
+@onready var right_elevator = get_node(right_elevator_path)
+@onready var player1 = get_node(player1_path)
+@onready var player2 = get_node(player2_path)
+@onready var room_holder = get_node(room_holder_path)
 
 @export var weapon_pickup_scene: PackedScene
 @export var possible_weapons: Array[WeaponData]
@@ -15,12 +21,14 @@ extends Node
 @export var round_start_delay: float = 1.0
 @export var round_end_delay: float = 1.0
 @export var pickup_fall_height: float = 200.0
+@export var pickup_spawn_delay: float = 1.0
 
 var current_room: Node = null
+var current_room_data: Node = null
 
 var round_over: bool = false
 var match_over: bool = false
-var game_over := false
+var game_over: bool = false
 
 var p1_score: int = 0
 var p2_score: int = 0
@@ -38,7 +46,7 @@ func start_round() -> void:
 
 	load_random_room()
 	clear_old_weapon_pickups()
-	call_deferred("spawn_random_weapons")
+	clear_old_thrown_weapons()
 
 	player1.global_position = left_elevator.get_spawn_position()
 	player2.global_position = right_elevator.get_spawn_position()
@@ -57,21 +65,30 @@ func start_round() -> void:
 	left_elevator.open_elevator()
 	right_elevator.open_elevator()
 
+	call_deferred("spawn_weapons_with_delay")
+
 	print("Round start")
 	print("Score: P1 ", p1_score, " - P2 ", p2_score)
+
+	if current_room_data != null and "room_name" in current_room_data:
+		print("Room: ", current_room_data.room_name)
 
 func load_random_room() -> void:
 	if current_room != null:
 		current_room.queue_free()
 		current_room = null
+		current_room_data = null
 
 	if room_scenes.is_empty():
 		push_error("No room scenes assigned in GameManager")
 		return
 
 	var room_index: int = randi() % room_scenes.size()
-	current_room = room_scenes[room_index].instantiate()
+	var room_scene: PackedScene = room_scenes[room_index]
+	current_room = room_scene.instantiate()
 	room_holder.add_child(current_room)
+
+	current_room_data = current_room.get_node_or_null("RoomData")
 
 func on_player_died(dead_player: Node) -> void:
 	if round_over or match_over:
@@ -101,12 +118,23 @@ func check_match_win() -> void:
 		match_over = true
 		print("PLAYER 1 WINS THE MATCH")
 		end_game(1)
-
 	elif p2_score >= wins_needed:
 		match_over = true
 		print("PLAYER 2 WINS THE MATCH")
 		end_game(2)
 
+func spawn_weapons_with_delay() -> void:
+	var delay: float = pickup_spawn_delay
+
+	if current_room_data != null and "pickup_spawn_delay" in current_room_data:
+		delay = current_room_data.pickup_spawn_delay
+
+	await get_tree().create_timer(delay).timeout
+
+	if match_over:
+		return
+
+	spawn_random_weapons()
 
 func spawn_random_weapons() -> void:
 	if current_room == null:
@@ -124,7 +152,7 @@ func spawn_random_weapons() -> void:
 		return
 
 	var spawn_points: Array[Node] = []
-	for child in item_spawns.get_children():
+	for child: Node in item_spawns.get_children():
 		spawn_points.append(child)
 
 	if spawn_points.is_empty():
@@ -133,16 +161,31 @@ func spawn_random_weapons() -> void:
 
 	spawn_points.shuffle()
 
-	var spawn_count: int = mini(pickups_per_round, spawn_points.size())
+	var local_pickups_per_round: int = pickups_per_round
+	var weapon_pool: Array[WeaponData] = possible_weapons
+
+	if current_room_data != null:
+		if "pickups_per_round" in current_room_data:
+			local_pickups_per_round = current_room_data.pickups_per_round
+
+		if "allowed_weapons" in current_room_data:
+			if not current_room_data.allowed_weapons.is_empty():
+				weapon_pool = current_room_data.allowed_weapons
+
+	if weapon_pool.is_empty():
+		print("Weapon pool is empty")
+		return
+
+	var spawn_count: int = mini(local_pickups_per_round, spawn_points.size())
 
 	for i: int in range(spawn_count):
 		var spawn_marker: Node = spawn_points[i]
-		var pickup = weapon_pickup_scene.instantiate()
+		var pickup: Node = weapon_pickup_scene.instantiate()
 
 		if pickup == null:
 			continue
 
-		var random_weapon: WeaponData = possible_weapons[randi() % possible_weapons.size()]
+		var random_weapon: WeaponData = weapon_pool[randi() % weapon_pool.size()]
 		pickup.weapon_data = random_weapon
 
 		var spawn_pos: Vector2 = spawn_marker.global_position + Vector2(0, -pickup_fall_height)
@@ -151,17 +194,20 @@ func spawn_random_weapons() -> void:
 		pickup.set_deferred("global_position", spawn_pos)
 
 		if pickup is RigidBody2D:
-			pickup.set_deferred("linear_velocity", Vector2(randf_range(-40.0, 40.0), 0.0))
-			pickup.set_deferred("angular_velocity", randf_range(-3.0, 3.0))
+			(pickup as RigidBody2D).set_deferred("linear_velocity", Vector2(randf_range(-40.0, 40.0), 0.0))
+			(pickup as RigidBody2D).set_deferred("angular_velocity", randf_range(-3.0, 3.0))
+
 
 func clear_old_weapon_pickups() -> void:
-	for child in get_parent().get_children():
-		if child.name == "WeaponPickup":
-			child.queue_free()
-
+	for pickup in get_tree().get_nodes_in_group("weapon_pickups"):
+		pickup.queue_free()
+		
+func clear_old_thrown_weapons() -> void:
+	for thrown in get_tree().get_nodes_in_group("thrown_weapons"):
+		thrown.queue_free()
 func end_game(winner: int) -> void:
 	if game_over:
-		return  # prevents multiple triggers
+		return
 
 	game_over = true
 
@@ -173,5 +219,4 @@ func end_game(winner: int) -> void:
 	print("Player ", winner, " wins!")
 
 	await get_tree().create_timer(1.5).timeout
-
 	get_tree().change_scene_to_file("res://Scenes/start_menu.tscn")

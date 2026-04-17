@@ -29,6 +29,7 @@ folder_colors={
 "res://Assets/": "blue",
 "res://Assets/WeaponSprites/": "purple",
 "res://Scenes/": "blue",
+"res://Scenes/Rooms/": "teal",
 "res://Scripts/": "green",
 "res://Weapon Data/": "purple"
 }

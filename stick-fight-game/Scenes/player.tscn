@@ -33,12 +33,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftArm" type="ColorRect" parent="Visuals"]
+visible = false
 offset_left = -18.0
 offset_top = -6.0
 offset_right = -12.0
 offset_bottom = 6.0
 
 [node name="RightArm" type="ColorRect" parent="Visuals"]
+visible = false
 offset_left = 12.0
 offset_top = -6.0
 offset_right = 18.0
@@ -50,3 +52,9 @@ points = PackedVector2Array(0, 0, 30, 0)
 width = 2.0
 
 [node name="WeaponHold" type="Marker2D" parent="."]
+
+[node name="LeftWallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(-24, 0)
+
+[node name="RightWallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(24, 0)

@@ -13,6 +13,7 @@ var idle_start_y: float = 0.0
 var landed: bool = false
 
 func _ready() -> void:
+	add_to_group("weapon_pickups")
 	if weapon_data != null and weapon_data.weapon_texture != null:
 		sprite.texture = weapon_data.weapon_texture
 		sprite.scale = weapon_data.weapon_scale

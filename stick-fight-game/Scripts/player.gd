@@ -16,6 +16,12 @@ extends CharacterBody2D
 @export var aim_length: float = 40.0
 @export var stick_deadzone: float = 0.2
 
+@export var block_duration: float = 0.15
+@export var block_cooldown: float = 1.0
+@export var max_health: int = 100
+
+@export var max_jumps: int = 2
+
 @onready var visuals = get_node_or_null("Visuals")
 @onready var body = get_node_or_null("Visuals/Body")
 @onready var left_arm = get_node_or_null("Visuals/LeftArm")
@@ -24,9 +30,6 @@ extends CharacterBody2D
 @onready var weapon_hold = get_node_or_null("WeaponHold")
 @onready var aim_line = get_node_or_null("AimLine")
 
-@export var block_duration: float = 0.15
-@export var block_cooldown: float = 1.0
-@export var max_health: int = 100
 var health: int = 100
 
 var is_blocking: bool = false
@@ -46,12 +49,14 @@ var jump_was_down: bool = false
 var attack_was_down: bool = false
 var throw_was_down: bool = false
 
+var jumps_left: int = 2
+
 func _ready() -> void:
 	health = max_health
 	is_dead = false
+	jumps_left = max_jumps
 	setup_colors()
 	update_aim_line()
-
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -65,6 +70,9 @@ func _physics_process(delta: float) -> void:
 	update_held_weapon_transform()
 	move_and_slide()
 
+	if is_on_floor():
+		jumps_left = max_jumps
+
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -73,7 +81,7 @@ func apply_gravity(delta: float) -> void:
 		velocity.y = max_fall_speed
 
 func handle_movement(delta: float) -> void:
-	var dir := get_move_input()
+	var dir: float = get_move_input()
 
 	if dir != 0.0:
 		velocity.x = move_toward(velocity.x, dir * move_speed, acceleration * delta)
@@ -81,22 +89,23 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
 
 func handle_jump() -> void:
-	if get_jump_pressed() and is_on_floor():
+	if get_jump_pressed() and jumps_left > 0:
 		velocity.y = jump_force
+		jumps_left -= 1
 
 func handle_aim() -> void:
 	if has_controller():
-		var aim_x := Input.get_joy_axis(device_id, JOY_AXIS_RIGHT_X)
-		var aim_y := Input.get_joy_axis(device_id, JOY_AXIS_RIGHT_Y)
+		var aim_x: float = Input.get_joy_axis(device_id, JOY_AXIS_RIGHT_X)
+		var aim_y: float = Input.get_joy_axis(device_id, JOY_AXIS_RIGHT_Y)
 
-		var stick_vec := Vector2(aim_x, aim_y)
+		var stick_vec: Vector2 = Vector2(aim_x, aim_y)
 
 		if stick_vec.length() > stick_deadzone:
 			aim_dir = stick_vec.normalized()
 		else:
 			aim_dir = Vector2.RIGHT * facing
 	else:
-		var mouse_pos := get_global_mouse_position()
+		var mouse_pos: Vector2 = get_global_mouse_position()
 		aim_dir = (mouse_pos - global_position).normalized()
 
 		if aim_dir == Vector2.ZERO:
@@ -145,8 +154,8 @@ func update_aim_line() -> void:
 	if aim_line == null:
 		return
 
-	var start_point := Vector2(10 * facing, 0)
-	var end_point := start_point + aim_dir * aim_length
+	var start_point: Vector2 = Vector2(10 * facing, 0)
+	var end_point: Vector2 = start_point + aim_dir * aim_length
 
 	aim_line.clear_points()
 	aim_line.add_point(start_point)
@@ -156,13 +165,13 @@ func update_held_weapon_transform() -> void:
 	if weapon_hold == null:
 		return
 
-	var target_pos := Vector2(10 * facing, 0) + aim_dir * 8.0
+	var target_pos: Vector2 = Vector2(10 * facing, 0) + aim_dir * 8.0
 	weapon_hold.position = weapon_hold.position.lerp(target_pos, 0.25)
 
 	if held_weapon_sprite == null:
 		return
 
-	var target_angle := aim_dir.angle()
+	var target_angle: float = aim_dir.angle()
 	held_weapon_sprite.rotation = lerp_angle(held_weapon_sprite.rotation, target_angle, 0.25)
 
 	if aim_dir.x < 0.0:
@@ -231,7 +240,7 @@ func throw_weapon() -> void:
 	var thrown_weapon = thrown_weapon_scene.instantiate()
 	thrown_weapon.global_position = global_position + aim_dir * 16.0
 	thrown_weapon.direction = aim_dir
-	thrown_weapon.speed = 1500
+	thrown_weapon.speed = 1500.0
 	thrown_weapon.damage = 8
 	thrown_weapon.owner_player = self
 	thrown_weapon.weapon_texture = current_weapon.weapon_texture
@@ -284,8 +293,6 @@ func take_hit(hit_dir: Vector2, damage: int, force: float) -> void:
 		is_dead = true
 		die()
 
-	velocity += hit_dir * force
-
 func reset_for_round() -> void:
 	velocity = Vector2.ZERO
 	health = max_health
@@ -297,6 +304,7 @@ func reset_for_round() -> void:
 	aim_dir = Vector2.RIGHT * facing
 	update_aim_line()
 	setup_colors()
+	jumps_left = max_jumps
 
 func die() -> void:
 	var gm = get_parent().get_node_or_null("GameManager")
@@ -331,10 +339,10 @@ func get_move_input() -> float:
 	var left_action := "p1_left" if player_id == 1 else "p2_left"
 	var right_action := "p1_right" if player_id == 1 else "p2_right"
 
-	var dir := Input.get_axis(left_action, right_action)
+	var dir: float = Input.get_axis(left_action, right_action)
 
 	if has_controller():
-		var joy_dir := Input.get_joy_axis(device_id, JOY_AXIS_LEFT_X)
+		var joy_dir: float = Input.get_joy_axis(device_id, JOY_AXIS_LEFT_X)
 		if abs(joy_dir) > 0.2:
 			dir = joy_dir
 
@@ -342,11 +350,11 @@ func get_move_input() -> float:
 
 func get_jump_pressed() -> bool:
 	var jump_action := "p1_jump" if player_id == 1 else "p2_jump"
-	var pressed := Input.is_action_just_pressed(jump_action)
+	var pressed: bool = Input.is_action_just_pressed(jump_action)
 
 	if has_controller():
-		var joy_down := Input.is_joy_button_pressed(device_id, JOY_BUTTON_A)
-		var just_pressed := joy_down and not jump_was_down
+		var joy_down: bool = Input.is_joy_button_pressed(device_id, JOY_BUTTON_A)
+		var just_pressed: bool = joy_down and not jump_was_down
 		jump_was_down = joy_down
 		if just_pressed:
 			pressed = true
@@ -356,12 +364,12 @@ func get_jump_pressed() -> bool:
 	return pressed
 
 func get_block_pressed() -> bool:
-	var pressed := false
+	var pressed: bool = false
 
 	if has_controller():
-		var lt := Input.get_joy_axis(device_id, JOY_AXIS_TRIGGER_LEFT)
-		var down := lt > 0.35
-		var just_pressed := down and not block_pressed_last_frame
+		var lt: float = Input.get_joy_axis(device_id, JOY_AXIS_TRIGGER_LEFT)
+		var down: bool = lt > 0.35
+		var just_pressed: bool = down and not block_pressed_last_frame
 		block_pressed_last_frame = down
 		if just_pressed:
 			pressed = true
@@ -370,30 +378,8 @@ func get_block_pressed() -> bool:
 
 	return pressed
 
-func start_block() -> void:
-	can_block = false
-	is_blocking = true
-
-	flash_block()
-
-	if aim_line != null:
-		aim_line.default_color = Color(0.4, 0.8, 1.0, 1.0)
-
-	block_timer()
-
-func block_timer() -> void:
-	await get_tree().create_timer(block_duration).timeout
-
-	is_blocking = false
-
-	if aim_line != null:
-		aim_line.default_color = Color(1, 1, 1, 1)
-
-	await get_tree().create_timer(block_cooldown).timeout
-	can_block = true
-
 func flash_block() -> void:
-	var flash_color := Color(0.7, 0.9, 1.0, 1.0)
+	var flash_color: Color = Color(0.7, 0.9, 1.0, 1.0)
 
 	if body != null:
 		body.color = flash_color
@@ -407,15 +393,15 @@ func flash_block() -> void:
 func block_flash_reset() -> void:
 	await get_tree().create_timer(0.06).timeout
 	setup_colors()
-	
+
 func get_attack_pressed() -> bool:
 	var attack_action := "p1_attack" if player_id == 1 else "p2_attack"
-	var pressed := Input.is_action_just_pressed(attack_action)
+	var pressed: bool = Input.is_action_just_pressed(attack_action)
 
 	if has_controller():
-		var rt := Input.get_joy_axis(device_id, JOY_AXIS_TRIGGER_RIGHT)
-		var down := rt > 0.35
-		var just_pressed := down and not attack_was_down
+		var rt: float = Input.get_joy_axis(device_id, JOY_AXIS_TRIGGER_RIGHT)
+		var down: bool = rt > 0.35
+		var just_pressed: bool = down and not attack_was_down
 		attack_was_down = down
 		if just_pressed:
 			pressed = true
@@ -426,11 +412,11 @@ func get_attack_pressed() -> bool:
 
 func get_throw_pressed() -> bool:
 	var throw_action := "p1_throw" if player_id == 1 else "p2_throw"
-	var pressed := Input.is_action_just_pressed(throw_action)
+	var pressed: bool = Input.is_action_just_pressed(throw_action)
 
 	if has_controller():
-		var down := Input.is_joy_button_pressed(device_id, JOY_BUTTON_RIGHT_SHOULDER)
-		var just_pressed := down and not throw_was_down
+		var down: bool = Input.is_joy_button_pressed(device_id, JOY_BUTTON_RIGHT_SHOULDER)
+		var just_pressed: bool = down and not throw_was_down
 		throw_was_down = down
 		if just_pressed:
 			pressed = true
