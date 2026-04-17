@@ -9,8 +9,8 @@ extends RigidBody2D
 @onready var pickup_area = $PickupArea
 
 var bob_time: float = 0.0
-var landed: bool = false
 var idle_start_y: float = 0.0
+var landed: bool = false
 
 func _ready() -> void:
 	if weapon_data != null and weapon_data.weapon_texture != null:
@@ -35,7 +35,6 @@ func _on_body_entered(body: Node) -> void:
 	if landed:
 		return
 
-	# landed on anything solid
 	if body != null:
 		landed = true
 		freeze = true
@@ -45,6 +44,7 @@ func _on_pickup_area_body_entered(body: Node) -> void:
 	if weapon_data == null:
 		return
 
-	if body.has_method("pickup_weapon"):
-		body.pickup_weapon(weapon_data)
-		queue_free()
+	if body.has_method("pickup_weapon") and body.has_method("can_pickup_weapon"):
+		if body.can_pickup_weapon():
+			body.pickup_weapon(weapon_data)
+			queue_free()
