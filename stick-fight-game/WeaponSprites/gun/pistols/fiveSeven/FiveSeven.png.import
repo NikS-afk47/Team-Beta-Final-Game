@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kg3web2yca7m"
-path="res://.godot/imported/Ak.png-5b49b3637ec44be7a5652d5a90e8d367.ctex"
+uid="uid://cy5hq637xr6y2"
+path="res://.godot/imported/FiveSeven.png-e48e392d4f9ef36433679ac9eecbf5db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/WeaponSprites/gun/Ak/Ak.png"
-dest_files=["res://.godot/imported/Ak.png-5b49b3637ec44be7a5652d5a90e8d367.ctex"]
+source_file="res://WeaponSprites/gun/pistols/fiveSeven/FiveSeven.png"
+dest_files=["res://.godot/imported/FiveSeven.png-e48e392d4f9ef36433679ac9eecbf5db.ctex"]
 
 [params]
 

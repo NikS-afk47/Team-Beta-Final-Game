@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://1px0vrvcl6hf"]
 
-[ext_resource type="Script" uid="uid://jwg2e8o4pvg4" path="res://black_hole.gd" id="1_5vpqt"]
+[ext_resource type="Script" uid="uid://jwg2e8o4pvg4" path="res://Scripts/black_hole.gd" id="1_5vpqt"]
 [ext_resource type="Texture2D" uid="uid://dtly8jymqo6dr" path="res://Assets/circle-64.png" id="1_sjfy6"]
 [ext_resource type="Material" uid="uid://cocwwmr2jm2c8" path="res://new_particle_process_material.tres" id="2_q56d7"]
 

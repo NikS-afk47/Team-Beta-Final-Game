@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb2ncttudm8f3"
-path="res://.godot/imported/DesertEagle.png-49ca9c3640e5a95fa5b5c92d82b80ba2.ctex"
+uid="uid://c4i3rpag58c42"
+path="res://.godot/imported/Bazooka.png-e1534ee51be774baf329845bacd3a359.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/WeaponSprites/gun/pistols/desertEagle/DesertEagle.png"
-dest_files=["res://.godot/imported/DesertEagle.png-49ca9c3640e5a95fa5b5c92d82b80ba2.ctex"]
+source_file="res://WeaponSprites/gun/bazooka/Bazooka.png"
+dest_files=["res://.godot/imported/Bazooka.png-e1534ee51be774baf329845bacd3a359.ctex"]
 
 [params]
 

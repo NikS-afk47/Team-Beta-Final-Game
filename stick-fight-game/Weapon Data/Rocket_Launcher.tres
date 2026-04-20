@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://dlltygunlm17d"]
+
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="1_mbwuy"]
+[ext_resource type="Texture2D" uid="uid://fnlpi4iepwpi" path="res://WeaponSprites/gun/bazooka/Bazooka (1).png" id="2_mbwuy"]
+
+[resource]
+script = ExtResource("1_mbwuy")
+ammo = 3
+damage = 80
+bullet_speed = 1400.0
+fire_rate = 2.0
+knockback = 300.0
+explodes = true
+explosion_radius = 30.0
+weapon_texture = ExtResource("2_mbwuy")
+metadata/_custom_type_script = "uid://08q4t4fbic6f"

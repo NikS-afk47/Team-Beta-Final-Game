@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqyl1mg2v8p80"]
+[gd_scene load_steps=9 format=3 uid="uid://cqyl1mg2v8p80"]
 
 [ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_wwlvj"]
 [ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="1_xe7ev"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_mo16p"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="2_wwlvj"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="3_momfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
 size = Vector2(40.731216, 34.4)
@@ -17,7 +18,7 @@ size = Vector2(2301, 77)
 
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_wwlvj")
-allowed_weapons = Array[ExtResource("2_mo16p")]([ExtResource("2_wwlvj")])
+allowed_weapons = Array[ExtResource("2_mo16p")]([ExtResource("3_momfn"), ExtResource("2_wwlvj")])
 room_name = "hole w/platfom"
 
 [node name="GuideArea" type="Area2D" parent="."]

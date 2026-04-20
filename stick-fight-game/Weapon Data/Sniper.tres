@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://tw2m3vimhih4"]
+
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="1_vj0li"]
+[ext_resource type="Texture2D" uid="uid://bralc15v4mo8x" path="res://WeaponSprites/gun/snipers/sniper.png" id="2_vj0li"]
+
+[resource]
+script = ExtResource("1_vj0li")
+weapon_name = "Sniper"
+ammo = 3
+damage = 90
+bullet_speed = 1400.0
+fire_rate = 1.0
+recoil = 190.0
+knockback = 300.0
+weapon_texture = ExtResource("2_vj0li")
+metadata/_custom_type_script = "uid://08q4t4fbic6f"

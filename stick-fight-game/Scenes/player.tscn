@@ -58,3 +58,6 @@ target_position = Vector2(-24, 0)
 
 [node name="RightWallCheck" type="RayCast2D" parent="."]
 target_position = Vector2(24, 0)
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://40ovcg0r24gj"]
+
+[ext_resource type="Script" uid="uid://b21f7o5vfa6q8" path="res://Scripts/breakable_ice_floor.gd" id="1_5ncht"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wwgha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rayj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ncht"]
+
+[node name="BreakableIceFloor" type="StaticBody2D"]
+modulate = Color(0.76862746, 1, 1, 1)
+script = ExtResource("1_5ncht")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_wwgha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6rayj")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_5ncht")

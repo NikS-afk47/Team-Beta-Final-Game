@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://scb0g0sqcshc"]
 
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="1_6vqqy"]
-[ext_resource type="Texture2D" uid="uid://bfv4gefsochw4" path="res://Assets/WeaponSprites/gun/pistols/fiveSeven/FiveSeven_v2.png" id="2_wjvu0"]
+[ext_resource type="Texture2D" uid="uid://bfv4gefsochw4" path="res://WeaponSprites/gun/pistols/fiveSeven/FiveSeven_v2.png" id="2_wjvu0"]
 
 [resource]
 script = ExtResource("1_6vqqy")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8fj4ofp6cqm2"]
+
+[ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_c7gf7"]
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_o8ai2"]
+[ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="3_cva8h"]
+[ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="4_fy1pc"]
+[ext_resource type="PackedScene" uid="uid://cooihhdy2iq0k" path="res://Scenes/Enviroment/ice_floor.tscn" id="4_o8ai2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
+size = Vector2(40.731216, 34.4)
+
+[node name="RoomTemplate" type="Node2D"]
+
+[node name="RoomData" type="Node" parent="."]
+script = ExtResource("1_c7gf7")
+allowed_weapons = Array[ExtResource("2_o8ai2")]([ExtResource("3_cva8h")])
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_724v5")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="IceFloor" parent="Platforms" instance=ExtResource("4_o8ai2")]
+position = Vector2(-50, 621.5)
+scale = Vector2(39.610443, 3.2622828)
+
+[node name="Sprite2D" parent="Platforms/IceFloor" index="0"]
+scale = Vector2(19.490185, 20.35229)
+
+[node name="IceFloor2" parent="Platforms" instance=ExtResource("4_o8ai2")]
+position = Vector2(1200, 621.5)
+scale = Vector2(39.610443, 3.2622828)
+
+[node name="Sprite2D" parent="Platforms/IceFloor2" index="0"]
+scale = Vector2(19.490185, 20.35229)
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="WeaponPickup" parent="." instance=ExtResource("4_fy1pc")]
+position = Vector2(573, 548)
+weapon_data = ExtResource("3_cva8h")
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(574, 420)
+
+[editable path="Platforms/IceFloor"]
+[editable path="Platforms/IceFloor2"]

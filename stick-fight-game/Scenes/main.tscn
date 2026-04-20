@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cflb77ltr0el5"]
+[gd_scene load_steps=21 format=3 uid="uid://cflb77ltr0el5"]
 
 [ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
@@ -8,11 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://cl4re2f6s1686" path="res://Scenes/player.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="3_hptm8"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="4_d1ilt"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="5_jkdf5"]
 [ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4nl0038f4nup" path="res://Scenes/Rooms/Room1.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://cqyl1mg2v8p80" path="res://Scenes/Rooms/Room2.tscn" id="7_d1ilt"]
-[ext_resource type="Script" uid="uid://r81o0eay2c3d" path="res://cheat_manager.gd" id="8_6iyac"]
-[ext_resource type="PackedScene" uid="uid://1px0vrvcl6hf" path="res://black_hole.tscn" id="13_fdnlq"]
+[ext_resource type="Script" uid="uid://r81o0eay2c3d" path="res://Scripts/cheat_manager.gd" id="8_6iyac"]
+[ext_resource type="PackedScene" uid="uid://b8fj4ofp6cqm2" path="res://Scenes/Rooms/Room1_ice.tscn" id="9_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://blqx1jcv1c01u" path="res://Scenes/Rooms/Room2_ice.tscn" id="10_k12tt"]
+[ext_resource type="PackedScene" uid="uid://1px0vrvcl6hf" path="res://Scenes/black_hole.tscn" id="13_fdnlq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
+size = Vector2(2301, 77)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h1bgf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(20, 10.780548)
@@ -35,6 +43,102 @@ grow_vertical = 2
 scale = Vector2(2.0800014, 1.16)
 color = Color(0.07429191, 0.0854407, 0.08569164, 1)
 
+[node name="Wall" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1464, 1500.0001)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall5" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1619, 825)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5"]
+position = Vector2(571.49994, 669.59467)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall5"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1464, 77)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(712, 1500.0001)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall6" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(852.00006, 705)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall6"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall6"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(712, 77)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall4"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_0xm2m")
 left_elevator_path = NodePath("../LeftElevator")
@@ -43,13 +147,13 @@ player1_path = NodePath("../Player1")
 player2_path = NodePath("../Player2")
 room_holder_path = NodePath("../RoomHolder")
 weapon_pickup_scene = ExtResource("2_ynf5e")
-possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt")])
-room_scenes = Array[PackedScene]([ExtResource("2_7mycd"), ExtResource("6_hptm8"), ExtResource("7_d1ilt")])
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5")])
+room_scenes = Array[PackedScene]([ExtResource("2_7mycd"), ExtResource("6_hptm8"), ExtResource("7_d1ilt"), ExtResource("9_wsu2k"), ExtResource("10_k12tt")])
 wins_needed = 7
 
 [node name="CheatManager" type="Node" parent="."]
 script = ExtResource("8_6iyac")
-possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt")])
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5")])
 black_hole_scene = ExtResource("13_fdnlq")
 weapon_pickup_scene = ExtResource("2_ynf5e")
 

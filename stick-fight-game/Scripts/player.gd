@@ -30,6 +30,8 @@ extends CharacterBody2D
 @onready var weapon_hold = get_node_or_null("WeaponHold")
 @onready var aim_line = get_node_or_null("AimLine")
 
+@onready var floor_check = get_node_or_null("FloorCheck")
+
 var health: int = 100
 
 var is_blocking: bool = false
@@ -83,11 +85,12 @@ func apply_gravity(delta: float) -> void:
 
 func handle_movement(delta: float) -> void:
 	var dir: float = get_move_input()
+	var floor_friction_mult: float = get_floor_friction_mult()
 
 	if dir != 0.0:
 		velocity.x = move_toward(velocity.x, dir * move_speed, acceleration * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+		velocity.x = move_toward(velocity.x, 0.0, friction * floor_friction_mult * delta)
 
 func handle_jump() -> void:
 	if get_jump_pressed() and jumps_left > 0:
@@ -412,6 +415,7 @@ func get_attack_pressed() -> bool:
 	return pressed
 
 func get_throw_pressed() -> bool:
+	
 	var throw_action := "p1_throw" if player_id == 1 else "p2_throw"
 	var pressed: bool = Input.is_action_just_pressed(throw_action)
 
@@ -425,3 +429,13 @@ func get_throw_pressed() -> bool:
 		throw_was_down = false
 
 	return pressed
+func get_floor_friction_mult() -> float:
+	if floor_check == null:
+		return 1.0
+
+	if floor_check.is_colliding():
+		var collider = floor_check.get_collider()
+		if collider != null and "friction_mult" in collider:
+			return collider.friction_mult
+
+	return 1.0
