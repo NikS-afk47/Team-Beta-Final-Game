@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://duxd37uhjeq0k"]
+
+[ext_resource type="Texture2D" uid="uid://b3suoeqeqlcbt" path="res://Scenes/68d7bc29-3641-4e41-9d42-d680ff1fe89d.png" id="1_b07fi"]
+
+[sub_resource type="SystemFont" id="SystemFont_x6lt7"]
+
+[sub_resource type="FontVariation" id="FontVariation_x2ps0"]
+base_font = SubResource("SystemFont_x6lt7")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.015686275, 0.003921569, 1, 0.6901961)
+self_modulate = Color(1, 1, 0.9490196, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.775001
+anchor_top = 9.3
+anchor_right = 14.775001
+anchor_bottom = 9.3
+offset_left = -768.0
+offset_top = -598.0
+offset_right = 768.0
+offset_bottom = 426.0
+texture = ExtResource("1_b07fi")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 40.0
+offset_right = 781.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
+theme_override_font_sizes/font_size = 80
+text = "Main Menu "
+justification_flags = 161
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 182.0
+offset_right = 693.0
+offset_bottom = 259.0
+theme_override_colors/font_color = Color(0.94509804, 0.011764706, 0.23921569, 1)
+theme_override_font_sizes/font_size = 50
+text = "Start Game"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 295.0
+offset_right = 655.0
+offset_bottom = 372.0
+theme_override_colors/font_color = Color(0.972549, 0.1254902, 0.30980393, 1)
+theme_override_font_sizes/font_size = 50
+text = "Options "
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 403.0
+offset_right = 617.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0.98532575, 0.13819769, 0.22388947, 1)
+theme_override_font_sizes/font_size = 50
+text = "Back "
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 525.0
+offset_right = 615.0
+offset_bottom = 602.0
+theme_override_colors/font_color = Color(0.95686275, 0.15294118, 0.08627451, 1)
+theme_override_fonts/font = SubResource("FontVariation_x2ps0")
+theme_override_font_sizes/font_size = 50
+text = "Exit "

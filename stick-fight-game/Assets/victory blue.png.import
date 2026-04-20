@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ta7x03mbt125"
-path="res://.godot/imported/Stickman1.png-e695f034bdc3f7a07c9018730ca8c6a7.ctex"
+uid="uid://xrsavkptrg8a"
+path="res://.godot/imported/victory blue.png-b214a5dd304f105fb196e45981de7efb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Stickman1.png"
-dest_files=["res://.godot/imported/Stickman1.png-e695f034bdc3f7a07c9018730ca8c6a7.ctex"]
+source_file="res://Assets/victory blue.png"
+dest_files=["res://.godot/imported/victory blue.png-b214a5dd304f105fb196e45981de7efb.ctex"]
 
 [params]
 

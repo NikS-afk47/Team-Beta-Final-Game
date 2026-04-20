@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bufxegmyijid1"]
+
+[ext_resource type="Texture2D" uid="uid://dcpub2kp4mwot" path="res://Assets/Stickman1.png" id="1_ffolw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(144.00003, 157.00003)
+scale = Vector2(0.4617284, 0.38055557)
+texture = ExtResource("1_ffolw")
