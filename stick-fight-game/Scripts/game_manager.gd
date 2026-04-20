@@ -38,6 +38,7 @@ func _ready() -> void:
 	game_over = false
 	start_round()
 
+
 func start_round() -> void:
 	if match_over:
 		return
@@ -46,6 +47,7 @@ func start_round() -> void:
 
 	load_random_room()
 	clear_old_weapon_pickups()
+	clear_black_holes()
 	clear_old_thrown_weapons()
 
 	player1.global_position = left_elevator.get_spawn_position()
@@ -220,3 +222,7 @@ func end_game(winner: int) -> void:
 
 	await get_tree().create_timer(1.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/start_menu.tscn")
+
+func clear_black_holes() -> void:
+	for hole in get_tree().get_nodes_in_group("black_holes"):
+		hole.queue_free()

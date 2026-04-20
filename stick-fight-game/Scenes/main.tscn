@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cflb77ltr0el5"]
+[gd_scene load_steps=16 format=3 uid="uid://cflb77ltr0el5"]
 
 [ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4nl0038f4nup" path="res://Scenes/Rooms/Room1.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://cqyl1mg2v8p80" path="res://Scenes/Rooms/Room2.tscn" id="7_d1ilt"]
+[ext_resource type="Script" uid="uid://r81o0eay2c3d" path="res://cheat_manager.gd" id="8_6iyac"]
+[ext_resource type="PackedScene" uid="uid://1px0vrvcl6hf" path="res://black_hole.tscn" id="13_fdnlq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(20, 10.780548)
@@ -45,6 +47,12 @@ possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt")])
 room_scenes = Array[PackedScene]([ExtResource("2_7mycd"), ExtResource("6_hptm8"), ExtResource("7_d1ilt")])
 wins_needed = 7
 
+[node name="CheatManager" type="Node" parent="."]
+script = ExtResource("8_6iyac")
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt")])
+black_hole_scene = ExtResource("13_fdnlq")
+weapon_pickup_scene = ExtResource("2_ynf5e")
+
 [node name="LeftElevator" parent="." instance=ExtResource("1_1bvp3")]
 position = Vector2(-495, 500)
 
@@ -78,28 +86,9 @@ debug_color = Color(0.5000816, 0.42878503, 1, 0.41960785)
 
 [node name="Player1" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(-357, 396)
-player_id = 1
 device_id = 0
-gravity = 1200.0
-max_fall_speed = 950.0
-aim_length = 40.0
-stick_deadzone = 0.2
-block_duration = 0.15
-block_cooldown = 1.0
-max_health = 100
-wall_jump_push = 260.0
-wall_jump_up_force = -420.0
 
 [node name="Player2" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(1457, 376)
 player_id = 2
 device_id = 1
-gravity = 1200.0
-max_fall_speed = 950.0
-aim_length = 40.0
-stick_deadzone = 0.2
-block_duration = 0.15
-block_cooldown = 1.0
-max_health = 100
-wall_jump_push = 260.0
-wall_jump_up_force = -420.0

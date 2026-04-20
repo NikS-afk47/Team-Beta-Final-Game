@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://1px0vrvcl6hf"]
+
+[ext_resource type="Script" uid="uid://jwg2e8o4pvg4" path="res://black_hole.gd" id="1_5vpqt"]
+[ext_resource type="Texture2D" uid="uid://dtly8jymqo6dr" path="res://Assets/circle-64.png" id="1_sjfy6"]
+[ext_resource type="Material" uid="uid://cocwwmr2jm2c8" path="res://new_particle_process_material.tres" id="2_q56d7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q56d7"]
+radius = 1800.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vpqt"]
+
+[node name="BlackHole" type="Node2D"]
+script = ExtResource("1_5vpqt")
+pull_force = 900.0
+max_pull_force = 1500.0
+start_visual_scale = 0.8
+max_visual_scale = 500.0
+visual_grow_speed = 1.5
+start_pull_radius = 210.0
+max_pull_radius = 1900.0
+pull_grow_speed = 190.0
+start_kill_radius = 2.0
+max_kill_radius = 600.0
+kill_grow_speed = 40.0
+
+[node name="PullArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PullArea"]
+shape = SubResource("CircleShape2D_q56d7")
+
+[node name="KillZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("CircleShape2D_5vpqt")
+
+[node name="Core" type="Sprite2D" parent="."]
+modulate = Color(0.078814976, 0.07881499, 0.078814976, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_sjfy6")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="RingParticles" type="GPUParticles2D" parent="."]
+amount = 10
+amount_ratio = 0.8
+lifetime = 0.6
+local_coords = true
+process_material = ExtResource("2_q56d7")

@@ -52,6 +52,7 @@ var throw_was_down: bool = false
 var jumps_left: int = 2
 
 func _ready() -> void:
+	add_to_group("players")
 	health = max_health
 	is_dead = false
 	jumps_left = max_jumps
