@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cflb77ltr0el5"]
+[gd_scene load_steps=28 format=3 uid="uid://cflb77ltr0el5"]
 
 [ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
@@ -17,8 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://b8fj4ofp6cqm2" path="res://Scenes/Rooms/Room1_ice.tscn" id="9_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://blqx1jcv1c01u" path="res://Scenes/Rooms/Room2_ice.tscn" id="10_k12tt"]
 [ext_resource type="PackedScene" uid="uid://1px0vrvcl6hf" path="res://Scenes/black_hole.tscn" id="13_fdnlq"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="14_ee4r6"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="15_gt3je"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="16_3pmx8"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="17_u50mg"]
 [ext_resource type="Resource" uid="uid://p0alpyw8b5bo" path="res://Weapon Data/Bread_grenade.tres" id="18_b3802"]
-[ext_resource type="Texture2D" uid="uid://biknm78kkxnu2" path="res://WeaponSprites/New Piskel (13).png" id="19_fevyy"]
+[ext_resource type="Resource" uid="uid://b6pau4lo7a8og" path="res://Weapon Data/minigun.tres" id="23_gt3je"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
 size = Vector2(2301, 77)
@@ -142,13 +146,13 @@ player1_path = NodePath("../Player1")
 player2_path = NodePath("../Player2")
 room_holder_path = NodePath("../RoomHolder")
 weapon_pickup_scene = ExtResource("2_ynf5e")
-possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5")])
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5"), ExtResource("18_b3802"), ExtResource("14_ee4r6"), ExtResource("15_gt3je"), ExtResource("16_3pmx8"), ExtResource("17_u50mg")])
 room_scenes = Array[PackedScene]([ExtResource("2_7mycd"), ExtResource("6_hptm8"), ExtResource("7_d1ilt"), ExtResource("9_wsu2k"), ExtResource("10_k12tt")])
 wins_needed = 7
 
 [node name="CheatManager" type="Node" parent="."]
 script = ExtResource("8_6iyac")
-possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5")])
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5"), ExtResource("18_b3802"), ExtResource("14_ee4r6"), ExtResource("15_gt3je"), ExtResource("16_3pmx8"), ExtResource("17_u50mg"), ExtResource("23_gt3je")])
 black_hole_scene = ExtResource("13_fdnlq")
 weapon_pickup_scene = ExtResource("2_ynf5e")
 
@@ -191,12 +195,3 @@ device_id = 0
 position = Vector2(1457, 376)
 player_id = 2
 device_id = 1
-
-[node name="WeaponPickup" parent="." instance=ExtResource("2_ynf5e")]
-position = Vector2(1463, 523)
-weapon_data = ExtResource("18_b3802")
-
-[node name="Sprite2D" parent="WeaponPickup/Visuals" index="0"]
-texture = ExtResource("19_fevyy")
-
-[editable path="WeaponPickup"]

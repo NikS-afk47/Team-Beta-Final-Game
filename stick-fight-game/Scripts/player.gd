@@ -142,13 +142,32 @@ func handle_weapon_actions() -> void:
 		throw_weapon()
 
 func handle_attack() -> void:
-	if get_attack_pressed():
-		if current_weapon != null:
-			if current_weapon.is_grenade:
-				throw_grenade()
-			else:
-				shoot_weapon()
+	if current_weapon == null:
+		return
 
+	if current_weapon.is_grenade:
+		if get_attack_pressed():
+			throw_grenade()
+		return
+
+	if current_weapon.auto_fire:
+		if get_attack_down():
+			shoot_weapon()
+	else:
+		if get_attack_pressed():
+			shoot_weapon()
+
+func get_attack_down() -> bool:
+	var attack_action := "p1_attack" if player_id == 1 else "p2_attack"
+	var down: bool = Input.is_action_pressed(attack_action)
+
+	if has_controller():
+		var rt: float = Input.get_joy_axis(device_id, JOY_AXIS_TRIGGER_RIGHT)
+		if rt > 0.35:
+			down = true
+
+	return down
+	
 func update_facing() -> void:
 	if velocity.x > 5.0:
 		facing = 1
@@ -208,6 +227,41 @@ func shoot_weapon() -> void:
 	var recoil: float = current_weapon.recoil
 	var explodes: bool = current_weapon.explodes
 	var explosion_radius: float = current_weapon.explosion_radius
+	var bullets_per_shot: int = current_weapon.bullets_per_shot
+	var spread_degrees: float = current_weapon.spread_degrees
+
+	for i in range(bullets_per_shot):
+		var bullet = bullet_scene.instantiate()
+
+		var shot_dir: Vector2 = aim_dir
+
+		if bullets_per_shot > 1 and spread_degrees > 0.0:
+			var spread_offset: float
+
+			if bullets_per_shot == 1:
+				spread_offset = 0.0
+			else:
+				var t: float = float(i) / float(bullets_per_shot - 1)
+				spread_offset = lerpf(-spread_degrees * 0.5, spread_degrees * 0.5, t)
+
+			shot_dir = aim_dir.rotated(deg_to_rad(spread_offset)).normalized()
+
+		bullet.global_position = global_position + shot_dir * 18.0
+		bullet.direction = shot_dir
+		bullet.speed = bullet_speed
+		bullet.damage = damage
+		bullet.knockback = knockback
+		bullet.owner_player = self
+		bullet.explodes = explodes
+		bullet.explosion_radius = explosion_radius
+		get_parent().add_child(bullet)
+
+	current_weapon.ammo -= 1
+	velocity -= aim_dir * recoil
+
+	await get_tree().create_timer(fire_rate).timeout
+	can_shoot = true
+
 
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position + aim_dir * 18.0

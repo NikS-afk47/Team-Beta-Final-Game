@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_p20lr")
+weapon_name = "Deagle"
 ammo = 6
 damage = 18
 bullet_speed = 1350.0
@@ -12,4 +13,5 @@ fire_rate = 0.4
 recoil = 230.0
 knockback = 280.0
 weapon_texture = ExtResource("2_p20lr")
+weapon_scale = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://08q4t4fbic6f"

@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var damage: int = 100
+var damage: int = 40
 var knockback: float = 700.0
 var explosion_radius: float = 200.0
 var explosion_scene: PackedScene = null

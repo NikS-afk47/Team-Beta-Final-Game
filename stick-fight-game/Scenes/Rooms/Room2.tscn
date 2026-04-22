@@ -23,6 +23,7 @@ size = Vector2(2301, 77)
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_wwlvj")
 allowed_weapons = Array[ExtResource("2_mo16p")]([ExtResource("3_momfn"), ExtResource("2_wwlvj"), ExtResource("5_7a7y1"), ExtResource("6_cxadd"), ExtResource("7_k4lmf"), ExtResource("8_vsuda")])
+pickups_per_round = 4
 room_name = "hole w/platfom"
 
 [node name="GuideArea" type="Area2D" parent="."]

@@ -13,4 +13,5 @@ fire_rate = 1.0
 recoil = 190.0
 knockback = 300.0
 weapon_texture = ExtResource("2_vj0li")
+weapon_scale = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://08q4t4fbic6f"

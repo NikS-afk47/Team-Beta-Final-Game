@@ -12,5 +12,7 @@ bullet_speed = 1100.0
 fire_rate = 0.05
 recoil = 170.0
 knockback = 270.0
+auto_fire = true
 weapon_texture = ExtResource("2_egkvb")
+weapon_scale = Vector2(1, 1)
 metadata/_custom_type_script = "uid://08q4t4fbic6f"

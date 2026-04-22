@@ -8,4 +8,5 @@ script = ExtResource("1_6vqqy")
 ammo = 12
 bullet_speed = 1100.0
 weapon_texture = ExtResource("2_wjvu0")
+weapon_scale = Vector2(0.4, 0.4)
 metadata/_custom_type_script = "uid://08q4t4fbic6f"

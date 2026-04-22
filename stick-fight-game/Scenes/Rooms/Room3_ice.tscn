@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://c5rrbcot2s4en"]
+
+[ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_y26rj"]
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_5mj34"]
+[ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="3_agc4i"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="4_b5cwm"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="5_phgs3"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="6_jx2w7"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="7_4xg8i"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="8_ucoyc"]
+[ext_resource type="PackedScene" uid="uid://cooihhdy2iq0k" path="res://Scenes/Enviroment/ice_floor.tscn" id="9_oy7rp"]
+[ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="10_7vdf3"]
+[ext_resource type="Resource" uid="uid://p0alpyw8b5bo" path="res://Weapon Data/Bread_grenade.tres" id="11_ohx6l"]
+[ext_resource type="PackedScene" uid="uid://40ovcg0r24gj" path="res://Scenes/Enviroment/breakable_ice_floor.tscn" id="12_3y6m7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
+size = Vector2(40.731216, 34.4)
+
+[node name="RoomTemplate" type="Node2D"]
+
+[node name="RoomData" type="Node" parent="."]
+script = ExtResource("1_y26rj")
+allowed_weapons = Array[ExtResource("2_5mj34")]([ExtResource("3_agc4i"), ExtResource("4_b5cwm"), ExtResource("5_phgs3"), ExtResource("6_jx2w7"), ExtResource("7_4xg8i"), ExtResource("8_ucoyc")])
+pickups_per_round = 8
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_724v5")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="IceFloor" parent="Platforms" instance=ExtResource("9_oy7rp")]
+position = Vector2(-50, 621.5)
+scale = Vector2(39.610443, 3.2622828)
+
+[node name="Sprite2D" parent="Platforms/IceFloor" index="0"]
+scale = Vector2(19.490185, 20.35229)
+
+[node name="IceFloor2" parent="Platforms" instance=ExtResource("9_oy7rp")]
+position = Vector2(1200, 621.5)
+scale = Vector2(39.610443, 3.2622828)
+
+[node name="Sprite2D" parent="Platforms/IceFloor2" index="0"]
+scale = Vector2(19.490185, 20.35229)
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="BreakableIceFloor" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(236.00002, 530)
+scale = Vector2(2.216238, 5.971879)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="BreakableIceFloor2" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(905, 530)
+scale = Vector2(2.216238, 5.971879)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor2" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="BreakableIceFloor3" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(236.00002, 295)
+scale = Vector2(2.216238, 5.971879)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor3" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="BreakableIceFloor4" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(905, 295)
+scale = Vector2(2.216238, 5.971879)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor4" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="BreakableIceFloor5" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(569, 215.00003)
+scale = Vector2(35.74353, 2.4416158)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor5" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="BreakableIceFloor6" parent="Hazards" instance=ExtResource("12_3y6m7")]
+position = Vector2(569, 791)
+scale = Vector2(35.74353, 2.4416158)
+respawn_time = 15.0
+
+[node name="Sprite2D" parent="Hazards/BreakableIceFloor6" index="0"]
+scale = Vector2(19.977194, 20.095045)
+
+[node name="WeaponPickup" parent="." instance=ExtResource("10_7vdf3")]
+position = Vector2(573, 548)
+weapon_data = ExtResource("11_ohx6l")
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(574, 420)
+
+[node name="Spawn2" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(149, 420)
+
+[node name="Spawn3" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(978, 420)
+
+[node name="Spawn4" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(831, 127)
+
+[node name="Spawn5" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(397, 124)
+
+[editable path="Platforms/IceFloor"]
+[editable path="Platforms/IceFloor2"]
+[editable path="Hazards/BreakableIceFloor"]
+[editable path="Hazards/BreakableIceFloor2"]
+[editable path="Hazards/BreakableIceFloor3"]
+[editable path="Hazards/BreakableIceFloor4"]
+[editable path="Hazards/BreakableIceFloor5"]
+[editable path="Hazards/BreakableIceFloor6"]

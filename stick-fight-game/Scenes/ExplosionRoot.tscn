@@ -13,11 +13,14 @@ radius = 42.054413
 [node name="ExplosionRoot" type="Node2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_0jq38")
+damage = 40
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
 amount = 50
 texture = ExtResource("2_c16g2")
 lifetime = 0.65
+one_shot = true
 speed_scale = 1.5
 fixed_fps = 30
 emission_shape = 1

@@ -21,6 +21,7 @@ size = Vector2(40.731216, 34.4)
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_i65sp")
 allowed_weapons = Array[ExtResource("2_gpt4p")]([ExtResource("3_t1v55"), ExtResource("4_dxofo"), ExtResource("5_2h7i8"), ExtResource("6_en11y"), ExtResource("7_inx8l"), ExtResource("8_52an5")])
+pickups_per_round = 4
 
 [node name="GuideArea" type="Area2D" parent="."]
 metadata/_edit_lock_ = true

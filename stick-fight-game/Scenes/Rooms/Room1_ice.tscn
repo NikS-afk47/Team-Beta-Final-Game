@@ -20,6 +20,7 @@ size = Vector2(40.731216, 34.4)
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_c7gf7")
 allowed_weapons = Array[ExtResource("2_o8ai2")]([ExtResource("3_cva8h"), ExtResource("4_c6d3x"), ExtResource("5_lx0n1"), ExtResource("6_qgb1u"), ExtResource("7_jgjlw"), ExtResource("8_nj514")])
+pickups_per_round = 4
 
 [node name="GuideArea" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -50,13 +51,20 @@ scale = Vector2(19.490185, 20.35229)
 [node name="Hazards" type="Node2D" parent="."]
 
 [node name="WeaponPickup" parent="." instance=ExtResource("4_fy1pc")]
-position = Vector2(573, 548)
+position = Vector2(181, 555)
+weapon_data = ExtResource("11_bp6ic")
+
+[node name="WeaponPickup2" parent="." instance=ExtResource("4_fy1pc")]
+position = Vector2(946, 557)
 weapon_data = ExtResource("11_bp6ic")
 
 [node name="ItemSpawns" type="Node2D" parent="."]
 
 [node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
-position = Vector2(574, 420)
+position = Vector2(279, 517)
+
+[node name="Spawn2" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(873, 524)
 
 [editable path="Platforms/IceFloor"]
 [editable path="Platforms/IceFloor2"]
