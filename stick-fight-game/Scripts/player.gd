@@ -142,8 +142,12 @@ func handle_weapon_actions() -> void:
 		throw_weapon()
 
 func handle_attack() -> void:
-	if get_attack_pressed() and current_weapon != null:
-		shoot_weapon()
+	if get_attack_pressed():
+		if current_weapon != null:
+			if current_weapon.is_grenade:
+				throw_grenade()
+			else:
+				shoot_weapon()
 
 func update_facing() -> void:
 	if velocity.x > 5.0:
@@ -280,18 +284,18 @@ func clear_held_weapon_visual() -> void:
 		held_weapon_sprite = null
 
 func take_hit(hit_dir: Vector2, damage: int, force: float) -> void:
+	print("TAKE_HIT:", name, damage)
+
 	if is_dead:
 		return
 
 	if is_blocking:
-		force *= 0.15
-		damage = 0
 		return
 
 	health -= damage
-	velocity += hit_dir * force
+	velocity += hit_dir.normalized() * force
 
-	print(name, " health: ", health)
+	print(name, "health =", health)
 
 	if health <= 0:
 		is_dead = true
@@ -439,3 +443,33 @@ func get_floor_friction_mult() -> float:
 			return collider.friction_mult
 
 	return 1.0
+func throw_grenade() -> void:
+	if current_weapon == null:
+		return
+	if not current_weapon.is_grenade:
+		return
+	if current_weapon.grenade_scene == null:
+		print("No grenade scene assigned")
+		return
+	if current_weapon.ammo <= 0:
+		print(current_weapon.weapon_name, " click! empty")
+		return
+
+	var grenade = current_weapon.grenade_scene.instantiate()
+	grenade.global_position = global_position + aim_dir * 18.0
+	grenade.damage = current_weapon.damage
+	grenade.knockback = current_weapon.knockback
+	grenade.explosion_radius = current_weapon.explosion_radius
+	grenade.explosion_scene = current_weapon.explosion_scene
+	grenade.fuse_time = current_weapon.fuse_time
+
+	get_parent().add_child(grenade)
+
+	if grenade is RigidBody2D:
+		grenade.linear_velocity = aim_dir * current_weapon.throw_force + Vector2(0, -150)
+
+	current_weapon.ammo -= 1
+
+	if current_weapon.ammo <= 0:
+		current_weapon = null
+		clear_held_weapon_visual()

@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://blqx1jcv1c01u"]
+[gd_scene load_steps=14 format=3 uid="uid://blqx1jcv1c01u"]
 
 [ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_i65sp"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_gpt4p"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="3_t1v55"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="4_dxofo"]
 [ext_resource type="PackedScene" uid="uid://cooihhdy2iq0k" path="res://Scenes/Enviroment/ice_floor.tscn" id="4_rppis"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="5_2h7i8"]
 [ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="5_dg237"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="6_en11y"]
 [ext_resource type="PackedScene" uid="uid://40ovcg0r24gj" path="res://Scenes/Enviroment/breakable_ice_floor.tscn" id="6_gpt4p"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="7_inx8l"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="8_52an5"]
+[ext_resource type="Resource" uid="uid://p0alpyw8b5bo" path="res://Weapon Data/Bread_grenade.tres" id="11_of143"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
 size = Vector2(40.731216, 34.4)
@@ -14,7 +20,7 @@ size = Vector2(40.731216, 34.4)
 
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_i65sp")
-allowed_weapons = Array[ExtResource("2_gpt4p")]([ExtResource("3_t1v55")])
+allowed_weapons = Array[ExtResource("2_gpt4p")]([ExtResource("3_t1v55"), ExtResource("4_dxofo"), ExtResource("5_2h7i8"), ExtResource("6_en11y"), ExtResource("7_inx8l"), ExtResource("8_52an5")])
 
 [node name="GuideArea" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -46,7 +52,7 @@ scale = Vector2(19.490185, 20.35229)
 
 [node name="WeaponPickup" parent="." instance=ExtResource("5_dg237")]
 position = Vector2(573, 548)
-weapon_data = ExtResource("3_t1v55")
+weapon_data = ExtResource("11_of143")
 
 [node name="ItemSpawns" type="Node2D" parent="."]
 

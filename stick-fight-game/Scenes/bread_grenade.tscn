@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfhaa42cjy3yj"]
+
+[ext_resource type="Script" uid="uid://dh68nujg6i8a7" path="res://grenade.gd" id="1_3crsh"]
+[ext_resource type="Texture2D" uid="uid://biknm78kkxnu2" path="res://WeaponSprites/New Piskel (13).png" id="2_0k6ba"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vrxw"]
+radius = 13.0
+
+[node name="BreadGrenade" type="RigidBody2D"]
+script = ExtResource("1_3crsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6vrxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0k6ba")
+
+[node name="FuseTimer" type="Timer" parent="."]
+one_shot = true

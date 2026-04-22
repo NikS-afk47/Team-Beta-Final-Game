@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8fj4ofp6cqm2"]
+[gd_scene load_steps=13 format=3 uid="uid://b8fj4ofp6cqm2"]
 
 [ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_c7gf7"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_o8ai2"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="3_cva8h"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="4_c6d3x"]
 [ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="4_fy1pc"]
 [ext_resource type="PackedScene" uid="uid://cooihhdy2iq0k" path="res://Scenes/Enviroment/ice_floor.tscn" id="4_o8ai2"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="5_lx0n1"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="6_qgb1u"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="7_jgjlw"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="8_nj514"]
+[ext_resource type="Resource" uid="uid://p0alpyw8b5bo" path="res://Weapon Data/Bread_grenade.tres" id="11_bp6ic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
 size = Vector2(40.731216, 34.4)
@@ -13,7 +19,7 @@ size = Vector2(40.731216, 34.4)
 
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_c7gf7")
-allowed_weapons = Array[ExtResource("2_o8ai2")]([ExtResource("3_cva8h")])
+allowed_weapons = Array[ExtResource("2_o8ai2")]([ExtResource("3_cva8h"), ExtResource("4_c6d3x"), ExtResource("5_lx0n1"), ExtResource("6_qgb1u"), ExtResource("7_jgjlw"), ExtResource("8_nj514")])
 
 [node name="GuideArea" type="Area2D" parent="."]
 metadata/_edit_lock_ = true
@@ -45,7 +51,7 @@ scale = Vector2(19.490185, 20.35229)
 
 [node name="WeaponPickup" parent="." instance=ExtResource("4_fy1pc")]
 position = Vector2(573, 548)
-weapon_data = ExtResource("3_cva8h")
+weapon_data = ExtResource("11_bp6ic")
 
 [node name="ItemSpawns" type="Node2D" parent="."]
 

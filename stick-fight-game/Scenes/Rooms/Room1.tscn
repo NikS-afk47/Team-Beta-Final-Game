@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4nl0038f4nup"]
+[gd_scene load_steps=13 format=3 uid="uid://b4nl0038f4nup"]
 
 [ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="1_o25ql"]
 [ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_x5lkd"]
 [ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="2_f4spw"]
 [ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_kdtvj"]
 [ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="4_kdtvj"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="5_arvw2"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="6_tlmo5"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="7_y7b8n"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="8_54nc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
 size = Vector2(40.731216, 34.4)
@@ -18,7 +22,7 @@ size = Vector2(2301, 77)
 
 [node name="RoomData" type="Node" parent="."]
 script = ExtResource("1_x5lkd")
-allowed_weapons = Array[ExtResource("2_kdtvj")]([ExtResource("2_f4spw"), ExtResource("4_kdtvj")])
+allowed_weapons = Array[ExtResource("2_kdtvj")]([ExtResource("2_f4spw"), ExtResource("4_kdtvj"), ExtResource("5_arvw2"), ExtResource("6_tlmo5"), ExtResource("7_y7b8n"), ExtResource("8_54nc4")])
 room_name = "Hole"
 
 [node name="GuideArea" type="Area2D" parent="."]
