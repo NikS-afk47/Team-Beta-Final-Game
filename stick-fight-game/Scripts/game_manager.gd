@@ -17,7 +17,7 @@ extends Node
 @export var pickups_per_round: int = 2
 @export var room_scenes: Array[PackedScene]
 
-@export var wins_needed: int = 3
+@export var wins_needed: int = 5
 @export var round_start_delay: float = 1.0
 @export var round_end_delay: float = 1.0
 @export var pickup_fall_height: float = 200.0
@@ -212,17 +212,17 @@ func end_game(winner: int) -> void:
 		return
 
 	game_over = true
+	SaveData.last_match_winner = winner
 
 	if winner == 1:
 		SaveData.add_player1_win()
 	elif winner == 2:
 		SaveData.add_player2_win()
 
-	print("Player ", winner, " wins!")
+	print("Player ", winner, " wins the match!")
 
-	await get_tree().create_timer(1.5).timeout
-	get_tree().change_scene_to_file("res://Scenes/start_menu.tscn")
-
+	await get_tree().create_timer(0.5).timeout
+	get_tree().change_scene_to_file("res://Scenes/final_victory_scene.tscn")
 func clear_black_holes() -> void:
 	for hole in get_tree().get_nodes_in_group("black_holes"):
 		hole.queue_free()

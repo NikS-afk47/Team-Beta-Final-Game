@@ -20,12 +20,22 @@ extends CharacterBody2D
 @export var block_cooldown: float = 1.0
 @export var max_health: int = 100
 
+var melee_damage: int = 12
+var melee_knockback: float = 360.0
+var melee_range: float = 72.0
+var melee_vertical_range: float = 62.0
+var melee_cooldown: float = 0.35
+var melee_lunge: float = 120.0
+
 @export var max_jumps: int = 2
 
 @onready var visuals = get_node_or_null("Visuals")
 @onready var body = get_node_or_null("Visuals/Body")
 @onready var left_arm = get_node_or_null("Visuals/LeftArm")
 @onready var right_arm = get_node_or_null("Visuals/RightArm")
+@onready var left_leg = get_node_or_null("Visuals/LegLeft")
+@onready var right_leg = get_node_or_null("Visuals/LegRight")
+@onready var head = get_node_or_null("Visuals/Head")
 
 @onready var weapon_hold = get_node_or_null("WeaponHold")
 @onready var aim_line = get_node_or_null("AimLine")
@@ -53,6 +63,9 @@ var throw_was_down: bool = false
 
 var jumps_left: int = 2
 
+var can_melee: bool = true
+var is_melee_attacking: bool = false
+
 func _ready() -> void:
 	add_to_group("players")
 	health = max_health
@@ -70,6 +83,7 @@ func _physics_process(delta: float) -> void:
 	handle_weapon_actions()
 	handle_attack()
 	update_facing()
+	update_stickman_visuals()
 	update_held_weapon_transform()
 	move_and_slide()
 
@@ -142,7 +156,13 @@ func handle_weapon_actions() -> void:
 		throw_weapon()
 
 func handle_attack() -> void:
+	if is_dead:
+		return
+
+	# If the player has no weapon, the attack button becomes a punch/melee attack.
 	if current_weapon == null:
+		if get_attack_pressed():
+			melee_attack()
 		return
 
 	if current_weapon.is_grenade:
@@ -156,7 +176,6 @@ func handle_attack() -> void:
 	else:
 		if get_attack_pressed():
 			shoot_weapon()
-
 func get_attack_down() -> bool:
 	var attack_action := "p1_attack" if player_id == 1 else "p2_attack"
 	var down: bool = Input.is_action_pressed(attack_action)
@@ -212,6 +231,9 @@ func shoot_weapon() -> void:
 	if current_weapon == null:
 		return
 	if bullet_scene == null:
+		return
+	if current_weapon == null:
+		perform_melee_attack()
 		return
 
 	if current_weapon.ammo <= 0:
@@ -274,12 +296,33 @@ func shoot_weapon() -> void:
 	bullet.explosion_radius = explosion_radius
 	get_parent().add_child(bullet)
 
+	if current_weapon == null:
+		perform_melee_attack()
+		can_shoot = true
+		return
+
 	current_weapon.ammo -= 1
 	velocity -= aim_dir * recoil
 
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
+func perform_melee_attack() -> void:
+	# small forward lunge
+	velocity.x += facing * melee_lunge
+
+	# check for nearby players
+	for player in get_tree().get_nodes_in_group("players"):
+		if player == self:
+			continue
+
+		var dx = player.global_position.x - global_position.x
+		var dy = abs(player.global_position.y - global_position.y)
+
+		# check range
+		if sign(dx) == facing and abs(dx) <= melee_range and dy <= melee_vertical_range:
+			if player.has_method("take_damage"):
+				player.take_damage(melee_damage, global_position)
 func can_pickup_weapon() -> bool:
 	return current_weapon == null
 
@@ -374,9 +417,6 @@ func die() -> void:
 		gm.on_player_died(self)
 
 func setup_colors() -> void:
-	if body == null:
-		return
-
 	var main_color: Color
 	var arm_color: Color
 
@@ -387,14 +427,86 @@ func setup_colors() -> void:
 		main_color = Color(1.0, 0.25, 0.25, 1.0)
 		arm_color = Color(0.82, 0.18, 0.18, 1.0)
 
-	body.color = main_color
+	set_visual_color(body, main_color)
+	set_visual_color(left_arm, arm_color)
+	set_visual_color(right_arm, arm_color)
+	set_visual_color(left_leg, arm_color)
+	set_visual_color(right_leg, arm_color)
+	set_visual_color(head, main_color)
+
+func set_visual_color(node: Node, new_color: Color) -> void:
+	if node == null:
+		return
+
+	if node is Line2D:
+		node.default_color = new_color
+	elif node is ColorRect:
+		node.color = new_color
+	elif node is Sprite2D:
+		node.modulate = new_color
+
+func update_stickman_visuals() -> void:
+	# These only affect the stickman scene. The bread player has no legs, so this safely does nothing there.
+	if visuals == null:
+		return
+
+	var run_amount = clamp(abs(velocity.x) / move_speed, 0.0, 1.0)
+	var walk_cycle = Time.get_ticks_msec() / 120.0
+
+	if left_leg != null:
+		left_leg.rotation_degrees = sin(walk_cycle) * 25.0 * run_amount
+	if right_leg != null:
+		right_leg.rotation_degrees = -sin(walk_cycle) * 25.0 * run_amount
+
+	# During melee, keep the arms in the punch pose instead of letting the run animation overwrite them.
+	if is_melee_attacking:
+		if right_arm != null:
+			right_arm.rotation_degrees = -75.0
+		if left_arm != null:
+			left_arm.rotation_degrees = 20.0
+		return
 
 	if left_arm != null:
-		left_arm.color = arm_color
+		left_arm.rotation_degrees = -sin(walk_cycle) * 18.0 * run_amount
 	if right_arm != null:
-		right_arm.color = arm_color
+		right_arm.rotation_degrees = sin(walk_cycle) * 18.0 * run_amount
+
+func melee_attack() -> void:
+	if not can_melee:
+		return
+
+	can_melee = false
+	is_melee_attacking = true
+
+	var punch_dir: Vector2 = Vector2(facing, 0)
+	velocity.x += punch_dir.x * melee_lunge
+
+	for target in get_tree().get_nodes_in_group("players"):
+		if target == self:
+			continue
+		if target == null:
+			continue
+		if not target.has_method("take_hit"):
+			continue
+		if target.get("is_dead") == true:
+			continue
+
+		var to_target: Vector2 = target.global_position - global_position
+		var in_front: bool = to_target.normalized().dot(punch_dir) > 0.25
+		var close_enough: bool = abs(to_target.x) <= melee_range and abs(to_target.y) <= melee_vertical_range
+
+		if in_front and close_enough:
+			target.take_hit(punch_dir, melee_damage, melee_knockback)
+			break
+
+	await get_tree().create_timer(0.12).timeout
+	is_melee_attacking = false
+
+	await get_tree().create_timer(melee_cooldown).timeout
+	can_melee = true
 
 func has_controller() -> bool:
+
 	return device_id >= 0 and Input.get_connected_joypads().has(device_id)
 
 func get_move_input() -> float:
@@ -443,12 +555,12 @@ func get_block_pressed() -> bool:
 func flash_block() -> void:
 	var flash_color: Color = Color(0.7, 0.9, 1.0, 1.0)
 
-	if body != null:
-		body.color = flash_color
-	if left_arm != null:
-		left_arm.color = flash_color
-	if right_arm != null:
-		right_arm.color = flash_color
+	set_visual_color(body, flash_color)
+	set_visual_color(left_arm, flash_color)
+	set_visual_color(right_arm, flash_color)
+	set_visual_color(left_leg, flash_color)
+	set_visual_color(right_leg, flash_color)
+	set_visual_color(head, flash_color)
 
 	block_flash_reset()
 

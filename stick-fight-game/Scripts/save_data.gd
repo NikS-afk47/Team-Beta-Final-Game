@@ -2,6 +2,7 @@ extends Node
 
 var player1_wins: int = 0
 var player2_wins: int = 0
+var last_match_winner: int = 0
 
 const SAVE_PATH := "user://wins.save"
 
