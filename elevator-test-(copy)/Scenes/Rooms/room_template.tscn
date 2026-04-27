@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://bco25mnfxhls1"]
+
+[ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="1_lt6kj"]
+[ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_s3j8h"]
+[ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="2_d2rwr"]
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_h1l6b"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="4_h1l6b"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="5_4o48u"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="6_ttu2e"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="7_s4dwn"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="8_8yeeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
+size = Vector2(40.731216, 34.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smsha"]
+size = Vector2(2301, 77)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_457cn"]
+
+[node name="RoomTemplate" type="Node2D"]
+
+[node name="RoomData" type="Node" parent="."]
+script = ExtResource("1_s3j8h")
+allowed_weapons = Array[ExtResource("2_h1l6b")]([ExtResource("2_d2rwr"), ExtResource("4_h1l6b"), ExtResource("5_4o48u"), ExtResource("6_ttu2e"), ExtResource("7_s4dwn"), ExtResource("8_8yeeg")])
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_724v5")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Platforms"]
+modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
+top_level = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Floor"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_smsha")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Floor"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_457cn")
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="WeaponPickup" parent="." instance=ExtResource("1_lt6kj")]
+position = Vector2(573, 548)
+weapon_data = ExtResource("2_d2rwr")
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(579, 426)

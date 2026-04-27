@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://8te30wc76y6f"]
+
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="1_6su52"]
+[ext_resource type="Texture2D" uid="uid://cmvvcw2s0r1fa" path="res://WeaponSprites/pewpew.png" id="2_6su52"]
+
+[resource]
+script = ExtResource("1_6su52")
+weapon_name = "Shotgun"
+ammo = 5
+damage = 15
+bullet_speed = 1100.0
+fire_rate = 0.8
+recoil = 270.0
+knockback = 280.0
+weapon_texture = ExtResource("2_6su52")
+weapon_scale = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://08q4t4fbic6f"

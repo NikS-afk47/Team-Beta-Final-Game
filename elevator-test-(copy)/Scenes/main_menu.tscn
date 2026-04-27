@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl8moxwtohr4k"]
+
+[ext_resource type="Script" uid="uid://bl4bf0rqgb1x" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://b3suoeqeqlcbt" path="res://Scenes/68d7bc29-3641-4e41-9d42-d680ff1fe89d.png" id="2_48xlc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -169.0
+offset_top = -206.0
+offset_right = 1367.0
+offset_bottom = 818.0
+texture = ExtResource("2_48xlc")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 174.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Match"
+
+[node name="LockedButton1" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Locked Map"
+
+[node name="LockedButton2" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Loacked Map"
+
+[node name="LockedButton3" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Locked Map"
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"

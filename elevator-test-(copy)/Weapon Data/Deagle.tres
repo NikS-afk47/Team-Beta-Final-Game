@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://bd1ywb1usyb0p"]
+
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="1_p20lr"]
+[ext_resource type="Texture2D" uid="uid://bb2ncttudm8f3" path="res://WeaponSprites/gun/pistols/desertEagle/DesertEagle.png" id="2_p20lr"]
+
+[resource]
+script = ExtResource("1_p20lr")
+weapon_name = "Deagle"
+ammo = 6
+damage = 18
+bullet_speed = 1350.0
+fire_rate = 0.4
+recoil = 230.0
+knockback = 280.0
+weapon_texture = ExtResource("2_p20lr")
+weapon_scale = Vector2(0.4, 0.4)
+metadata/_custom_type_script = "uid://08q4t4fbic6f"

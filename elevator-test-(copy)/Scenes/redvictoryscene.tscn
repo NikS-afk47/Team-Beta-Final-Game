@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://clkngkvt6foy3"]
+
+[ext_resource type="Texture2D" uid="uid://bo6fk4mpbgusa" path="res://Assets/Redwin.png" id="1_h2bk7"]
+
+[node name="Redvictoryscene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(579, 331.5)
+scale = Vector2(1.1347656, 0.42643228)
+texture = ExtResource("1_h2bk7")

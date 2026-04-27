@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqyl1mg2v8p80"]
+
+[ext_resource type="Script" uid="uid://dyi827xmi8t2y" path="res://Scripts/room_data.gd" id="1_wwlvj"]
+[ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="1_xe7ev"]
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="2_mo16p"]
+[ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="2_wwlvj"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="3_momfn"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="5_7a7y1"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="6_cxadd"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="7_k4lmf"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="8_vsuda"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_724v5"]
+size = Vector2(40.731216, 34.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smsha"]
+size = Vector2(2301, 77)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_457cn"]
+
+[node name="RoomTemplate" type="Node2D"]
+
+[node name="RoomData" type="Node" parent="."]
+script = ExtResource("1_wwlvj")
+allowed_weapons = Array[ExtResource("2_mo16p")]([ExtResource("3_momfn"), ExtResource("2_wwlvj"), ExtResource("5_7a7y1"), ExtResource("6_cxadd"), ExtResource("7_k4lmf"), ExtResource("8_vsuda")])
+pickups_per_round = 4
+room_name = "hole w/platfom"
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_724v5")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Platforms"]
+modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
+top_level = true
+position = Vector2(-500, 0)
+scale = Vector2(0.52000016, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Floor"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_smsha")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Floor"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_457cn")
+
+[node name="Floor2" type="StaticBody2D" parent="Platforms"]
+modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
+top_level = true
+position = Vector2(1000, 0)
+scale = Vector2(0.52000016, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Floor2"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_smsha")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Floor2"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_457cn")
+
+[node name="Floor3" type="StaticBody2D" parent="Platforms"]
+modulate = Color(0.47007608, 0.4700758, 0.47007567, 1)
+top_level = true
+position = Vector2(436, 279)
+scale = Vector2(0.19108185, 0.29623622)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Floor3"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_smsha")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Floor3"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_457cn")
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="WeaponPickup" parent="." instance=ExtResource("1_xe7ev")]
+position = Vector2(-268, 532)
+weapon_data = ExtResource("2_wwlvj")
+
+[node name="WeaponPickup2" parent="." instance=ExtResource("1_xe7ev")]
+position = Vector2(1357, 535)
+weapon_data = ExtResource("2_wwlvj")
+
+[node name="ItemSpawns" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="ItemSpawns"]
+position = Vector2(561, 362)

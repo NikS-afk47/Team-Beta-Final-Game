@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0trhbx2fdxco"]
+
+[ext_resource type="Script" uid="uid://c0ygs287biy28" path="res://Scripts/bullet.gd" id="1_xjght"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4mw4s"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xjght"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_xjght")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.61104524, 0.36862612)
+shape = SubResource("CircleShape2D_4mw4s")
+
+[node name="Visual" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0.7411765, 1)
+scale = Vector2(8.904576, 4.6060286)
+texture = SubResource("CanvasTexture_xjght")

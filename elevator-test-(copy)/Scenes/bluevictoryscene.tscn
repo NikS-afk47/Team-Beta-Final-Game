@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bufxegmyijid1"]
+
+[ext_resource type="Texture2D" uid="uid://1crxcoa2yknc" path="res://Assets/Blue win.png" id="1_8tc1u"]
+
+[node name="Bluevictoryscene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(578.49994, 322)
+scale = Vector2(1.0598526, 0.44198895)
+texture = ExtResource("1_8tc1u")

@@ -1,0 +1,196 @@
+[gd_scene load_steps=28 format=3 uid="uid://cflb77ltr0el5"]
+
+[ext_resource type="Script" uid="uid://gkgqamk6fnn0" path="res://Scripts/game_manager.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ce87v2sftmdvw" path="res://Scenes/LeftElevator.tscn" id="1_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://br1xmo3qlbaag" path="res://Background/2c68d0c0-eccd-4e1f-a106-ad5484516e19.png" id="1_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://bco25mnfxhls1" path="res://Scenes/Rooms/room_template.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c4uytotyq6nrn" path="res://Scenes/RightElevator.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://0mtdogyi1nti" path="res://Scenes/weapon_pickup.tscn" id="2_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://bhhql6appy7u7" path="res://Scenes/stickmanplayer.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://08q4t4fbic6f" path="res://Scripts/weapon_data.gd" id="3_hptm8"]
+[ext_resource type="Resource" uid="uid://scb0g0sqcshc" path="res://Weapon Data/pistol.tres" id="4_d1ilt"]
+[ext_resource type="Resource" uid="uid://dqnwkemki4tkj" path="res://Weapon Data/Ak-47.tres" id="5_jkdf5"]
+[ext_resource type="Script" uid="uid://b1om0nyms8c7g" path="res://Scripts/void_zone.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b4nl0038f4nup" path="res://Scenes/Rooms/Room1.tscn" id="6_hptm8"]
+[ext_resource type="PackedScene" uid="uid://cqyl1mg2v8p80" path="res://Scenes/Rooms/Room2.tscn" id="7_d1ilt"]
+[ext_resource type="Script" uid="uid://r81o0eay2c3d" path="res://Scripts/cheat_manager.gd" id="8_6iyac"]
+[ext_resource type="PackedScene" uid="uid://b8fj4ofp6cqm2" path="res://Scenes/Rooms/Room1_ice.tscn" id="9_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://blqx1jcv1c01u" path="res://Scenes/Rooms/Room2_ice.tscn" id="10_k12tt"]
+[ext_resource type="PackedScene" uid="uid://1px0vrvcl6hf" path="res://Scenes/black_hole.tscn" id="13_fdnlq"]
+[ext_resource type="Resource" uid="uid://bd1ywb1usyb0p" path="res://Weapon Data/Deagle.tres" id="14_ee4r6"]
+[ext_resource type="Resource" uid="uid://dlltygunlm17d" path="res://Weapon Data/Rocket_Launcher.tres" id="15_gt3je"]
+[ext_resource type="Resource" uid="uid://8te30wc76y6f" path="res://Weapon Data/Shotgun.tres" id="16_3pmx8"]
+[ext_resource type="Resource" uid="uid://tw2m3vimhih4" path="res://Weapon Data/Sniper.tres" id="17_u50mg"]
+[ext_resource type="Resource" uid="uid://p0alpyw8b5bo" path="res://Weapon Data/Bread_grenade.tres" id="18_b3802"]
+[ext_resource type="Resource" uid="uid://b6pau4lo7a8og" path="res://Weapon Data/minigun.tres" id="23_gt3je"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
+size = Vector2(2301, 77)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h1bgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 10.780548)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(40.731216, 34.4)
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(592.00006, 549)
+scale = Vector2(1.3200002, 1.3600012)
+texture = ExtResource("1_h1bgf")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1464, 1500.0001)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall5" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1619, 825)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5"]
+position = Vector2(571.49994, 669.59467)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall5"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(-1464, 77)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(712, 1500.0001)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall6" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(852.00006, 705)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall6"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall6"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+modulate = Color(0.07450981, 0.08627451, 0.08627451, 1)
+top_level = true
+position = Vector2(712, 77)
+rotation = -1.5707964
+scale = Vector2(0.52000016, 1.48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+position = Vector2(571.5, 621.5)
+shape = SubResource("RectangleShape2D_k12tt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall4"]
+position = Vector2(573.0699, 645)
+scale = Vector2(2294.14, 122.74178)
+texture = SubResource("CanvasTexture_h1bgf")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_0xm2m")
+left_elevator_path = NodePath("../LeftElevator")
+right_elevator_path = NodePath("../RightElevator")
+player1_path = NodePath("../Player1")
+player2_path = NodePath("../Player2")
+room_holder_path = NodePath("../RoomHolder")
+weapon_pickup_scene = ExtResource("2_ynf5e")
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5"), ExtResource("18_b3802"), ExtResource("14_ee4r6"), ExtResource("15_gt3je"), ExtResource("16_3pmx8"), ExtResource("17_u50mg")])
+room_scenes = Array[PackedScene]([ExtResource("2_7mycd"), ExtResource("6_hptm8"), ExtResource("7_d1ilt"), ExtResource("9_wsu2k"), ExtResource("10_k12tt")])
+
+[node name="CheatManager" type="Node" parent="."]
+script = ExtResource("8_6iyac")
+possible_weapons = Array[ExtResource("3_hptm8")]([ExtResource("4_d1ilt"), ExtResource("5_jkdf5"), ExtResource("18_b3802"), ExtResource("14_ee4r6"), ExtResource("15_gt3je"), ExtResource("16_3pmx8"), ExtResource("17_u50mg"), ExtResource("23_gt3je")])
+black_hole_scene = ExtResource("13_fdnlq")
+weapon_pickup_scene = ExtResource("2_ynf5e")
+
+[node name="LeftElevator" parent="." instance=ExtResource("1_1bvp3")]
+position = Vector2(-495, 500)
+
+[node name="RightElevator" parent="." instance=ExtResource("2_lquwl")]
+position = Vector2(1644, 500)
+
+[node name="RoomHolder" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(573, 497)
+zoom = Vector2(0.5, 0.5)
+
+[node name="VoidZone" type="Area2D" parent="."]
+position = Vector2(592, 1073)
+scale = Vector2(121.70353, 19.217232)
+script = ExtResource("5_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidZone"]
+position = Vector2(0, 4.52719)
+shape = SubResource("RectangleShape2D_lquwl")
+debug_color = Color(0.60702735, 0, 0.13382712, 0.41960785)
+
+[node name="GuideArea" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuideArea"]
+position = Vector2(575.7031, 434.5)
+scale = Vector2(49.018764, 33.866276)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.5000816, 0.42878503, 1, 0.41960785)
+
+[node name="Player1" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-357, 396)
+device_id = 0
+
+[node name="Player2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(1457, 376)
+player_id = 2
+device_id = 1
