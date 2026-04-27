@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0s10sd8c4upp"]
+[gd_scene load_steps=4 format=3 uid="uid://d0s10sd8c4upp"]
 
 [ext_resource type="Script" uid="uid://chrwt3cc6rxa2" path="res://Scripts/start_menu.gd" id="1_jgtwh"]
 [ext_resource type="Texture2D" uid="uid://bl3rkhdrx571i" path="res://Assets/TitleScreen.png" id="2_m6uer"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgtwh"]
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.54776376, 0.519733, 0.49811852, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Start menu" type="Control"]
 layout_mode = 3
@@ -58,21 +70,56 @@ anchor_left = 0.771
 anchor_top = 0.814
 anchor_right = 0.771
 anchor_bottom = 0.814
-offset_left = -108.19202
-offset_top = -44.471985
-offset_right = 107.80798
-offset_bottom = 44.528015
+offset_left = -847.192
+offset_top = -97.471985
+offset_right = -631.192
+offset_bottom = -8.471985
+scale = Vector2(0.9972392, 0.6662682)
+theme_override_styles/normal = SubResource("StyleBoxFlat_jgtwh")
 text = "Play"
+icon_alignment = 1
 
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.208
+anchor_left = 0.771
 anchor_top = 0.814
-anchor_right = 0.208
+anchor_right = 0.777
 anchor_bottom = 0.814
-offset_left = -107.616
-offset_top = -44.471985
-offset_right = 108.384
-offset_bottom = 44.528015
+offset_left = -796.192
+offset_top = 3.5280762
+offset_right = -580.192
+offset_bottom = 92.528076
+scale = Vector2(0.51792157, 0.3644045)
+theme_override_styles/normal = SubResource("StyleBoxFlat_jgtwh")
 text = "Exit"
+icon_alignment = 1
+
+[node name="Control Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 415.0
+offset_right = 569.0
+offset_bottom = 438.0
+text = "XBOX CONTROLS
+Controller
+Movement - Left Stick
+Jump - A
+Block - LT
+Shoot - RT
+Aim - Right Stick
+Throw Weapon -RB/LB"
+
+[node name="Control Label Keyboard" type="Label" parent="."]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 415.0
+offset_right = 972.0
+offset_bottom = 594.0
+text = "MNK CONTROLS (testing controls)
+Movement - ASD (p1), arrow keys (P2)
+Jump - P1 W, P2 up arrow
+Block - P1 Q, P2 <
+Shoot - P1 F, P2 /
+Aim - mouse controls both
+Throw Weapon -not set"

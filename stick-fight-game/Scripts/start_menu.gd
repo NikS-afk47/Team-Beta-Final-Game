@@ -16,7 +16,7 @@ func update_win_labels() -> void:
 	player2_label.text = "Player 2\nWins: " + str(SaveData.player2_wins)
 
 func _on_play_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
